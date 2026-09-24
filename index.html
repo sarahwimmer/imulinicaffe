@@ -1,1039 +1,1693 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>i Mulini Caffè Mediterraneo | Vienna</title>
-
-<meta name="description" content="i Mulini Caffè Mediterraneo — Italian coffee, breakfast, focaccia and Mediterranean aperitivo in Vienna.">
-
-<style>
-:root{
-  --blue:#263f78;
-  --blue-dark:#182b55;
-  --terracotta:#883120;
-  --terracotta-light:#a44a37;
-  --cream:#f6f0e7;
-  --paper:#fffaf3;
-  --white:#fffdf9;
-  --ink:#252525;
-  --muted:#756f68;
-
-  /*
-    The original i Mulini menu uses Canela Text.
-    If a licensed Canela webfont is added later,
-    the website will automatically use it.
-  */
-  --serif:"Canela Text","Iowan Old Style","Baskerville","Times New Roman",serif;
-  --sans:-apple-system,BlinkMacSystemFont,"Helvetica Neue",Arial,sans-serif;
-}
-
-*{
-  box-sizing:border-box;
-  margin:0;
-  padding:0;
-}
-
-html{
-  scroll-behavior:smooth;
-}
-
-body{
-  background:var(--cream);
-  color:var(--ink);
-  font-family:var(--serif);
-  overflow-x:hidden;
-}
-
-img{
-  display:block;
-  width:100%;
-}
-
-a{
-  color:inherit;
-  text-decoration:none;
-}
-
-button{
-  font:inherit;
-}
-
-/* ================= NAV ================= */
-
-.nav{
-  position:fixed;
-  top:0;
-  left:0;
-  right:0;
-  z-index:1000;
-  transition:.35s ease;
-}
-
-.nav.scrolled{
-  background:rgba(246,240,231,.96);
-  backdrop-filter:blur(15px);
-  border-bottom:1px solid rgba(38,63,120,.15);
-}
-
-.nav-inner{
-  max-width:1350px;
-  margin:auto;
-  padding:18px 32px;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-}
-
-.nav-logo{
-  width:82px;
-  transition:.3s;
-}
-
-.nav.scrolled .nav-logo{
-  width:62px;
-}
-
-.nav-links{
-  display:flex;
-  align-items:center;
-  gap:32px;
-  color:white;
-  font-family:var(--sans);
-  font-size:12px;
-  text-transform:uppercase;
-  letter-spacing:1.8px;
-}
-
-.nav.scrolled .nav-links{
-  color:var(--blue);
-}
-
-.nav-button{
-  border:1px solid currentColor;
-  border-radius:100px;
-  padding:11px 20px;
-}
-
-/* ================= HERO ================= */
-
-.hero{
-  min-height:95vh;
-  position:relative;
-  display:flex;
-  align-items:flex-end;
-  overflow:hidden;
-}
-
-.hero-image{
-  position:absolute;
-  inset:0;
-  background:
-    linear-gradient(
-      180deg,
-      rgba(18,35,70,.12),
-      rgba(18,35,70,.15) 40%,
-      rgba(18,35,70,.78)
-    ),
-    url("facade.jpg") center/cover no-repeat;
-  transform:scale(1.04);
-  transition:transform 8s ease;
-}
-
-body.loaded .hero-image{
-  transform:scale(1);
-}
-
-.hero-content{
-  position:relative;
-  z-index:2;
-  width:100%;
-  max-width:1350px;
-  margin:auto;
-  padding:190px 45px 80px;
-  color:white;
-}
-
-.kicker{
-  font-family:var(--sans);
-  font-size:11px;
-  text-transform:uppercase;
-  letter-spacing:4px;
-  margin-bottom:25px;
-}
-
-.hero h1{
-  font-family:var(--serif);
-  font-weight:400;
-  font-size:clamp(75px,12vw,165px);
-  line-height:.75;
-  letter-spacing:-4px;
-}
-
-.hero h1 small{
-  display:block;
-  margin-top:35px;
-  font-size:.25em;
-  letter-spacing:5px;
-  text-transform:uppercase;
-  font-weight:400;
-}
-
-.hero-line{
-  display:flex;
-  align-items:flex-end;
-  justify-content:space-between;
-  gap:40px;
-  margin-top:50px;
-}
-
-.hero-copy{
-  max-width:570px;
-  font-size:clamp(22px,2.4vw,32px);
-  line-height:1.3;
-}
-
-.circle-link{
-  width:125px;
-  height:125px;
-  flex:0 0 125px;
-  border:1px solid rgba(255,255,255,.8);
-  border-radius:50%;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  text-align:center;
-  font-family:var(--sans);
-  font-size:10px;
-  text-transform:uppercase;
-  letter-spacing:1.5px;
-  transition:.3s;
-}
-
-.circle-link:hover{
-  background:white;
-  color:var(--blue);
-  transform:rotate(-5deg);
-}
-
-/* ================= WALK INS ================= */
-
-.walkins{
-  background:var(--terracotta);
-  color:white;
-  text-align:center;
-  padding:18px;
-  font-family:var(--sans);
-  text-transform:uppercase;
-  letter-spacing:3px;
-  font-size:11px;
-}
-
-/* ================= GENERAL ================= */
-
-.section{
-  padding:120px 35px;
-}
-
-.container{
-  max-width:1200px;
-  margin:auto;
-}
-
-.label{
-  font-family:var(--sans);
-  color:var(--terracotta);
-  text-transform:uppercase;
-  letter-spacing:3px;
-  font-size:10px;
-  margin-bottom:25px;
-}
-
-.display{
-  font-weight:400;
-  color:var(--blue);
-  font-size:clamp(50px,7vw,95px);
-  line-height:.94;
-  letter-spacing:-2px;
-}
-
-.reveal{
-  opacity:0;
-  transform:translateY(35px);
-  transition:
-    opacity .9s ease,
-    transform .9s ease;
-}
-
-.reveal.visible{
-  opacity:1;
-  transform:none;
-}
-
-/* ================= STORY ================= */
-
-.story{
-  background:var(--paper);
-}
-
-.story-layout{
-  display:grid;
-  grid-template-columns:.9fr 1.1fr;
-  gap:90px;
-  align-items:center;
-}
-
-.story-photo{
-  position:relative;
-}
-
-.story-photo img{
-  height:690px;
-  object-fit:cover;
-}
-
-.story-photo::after{
-  content:"i Mulini";
-  position:absolute;
-  right:-38px;
-  bottom:60px;
-  background:var(--terracotta);
-  color:white;
-  width:115px;
-  height:115px;
-  border-radius:50%;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  font-style:italic;
-  font-size:20px;
-  transform:rotate(-8deg);
-}
-
-.story-copy{
-  max-width:570px;
-}
-
-.story-copy .display{
-  margin-bottom:45px;
-}
-
-.story-copy p{
-  font-size:20px;
-  line-height:1.7;
-  margin-bottom:22px;
-}
-
-.story-copy .italian{
-  color:var(--terracotta);
-  font-size:31px;
-  font-style:italic;
-  margin-top:38px;
-}
-
-/* ================= MANIFESTO ================= */
-
-.manifesto{
-  background:var(--blue);
-  color:white;
-  padding:125px 35px;
-  text-align:center;
-}
-
-.manifesto-inner{
-  max-width:1050px;
-  margin:auto;
-}
-
-.manifesto .label{
-  color:#dca998;
-}
-
-.manifesto h2{
-  font-size:clamp(52px,8vw,105px);
-  font-weight:400;
-  line-height:.93;
-}
-
-.manifesto h2 em{
-  color:#dca998;
-  font-weight:400;
-}
-
-/* ================= MOMENTS ================= */
-
-.moments{
-  background:var(--cream);
-}
-
-.moments-heading{
-  max-width:800px;
-  margin-bottom:70px;
-}
-
-.moment-tabs{
-  display:flex;
-  gap:0;
-  border-bottom:1px solid rgba(38,63,120,.25);
-  margin-bottom:55px;
-}
-
-.moment-tab{
-  background:none;
-  border:0;
-  color:var(--blue);
-  padding:15px 30px 15px 0;
-  margin-right:35px;
-  cursor:pointer;
-  font-size:27px;
-  opacity:.45;
-  position:relative;
-  transition:.25s;
-}
-
-.moment-tab.active{
-  opacity:1;
-  color:var(--terracotta);
-}
-
-.moment-tab.active::after{
-  content:"";
-  height:2px;
-  background:var(--terracotta);
-  position:absolute;
-  bottom:-1px;
-  left:0;
-  right:30px;
-}
-
-.moment-content{
-  display:none;
-  grid-template-columns:1.25fr .75fr;
-  gap:50px;
-  align-items:end;
-  animation:fadeMoment .55s ease;
-}
-
-.moment-content.active{
-  display:grid;
-}
-
-@keyframes fadeMoment{
-  from{
-    opacity:0;
-    transform:translateY(12px);
-  }
-  to{
-    opacity:1;
-    transform:none;
-  }
-}
-
-.moment-main img{
-  height:620px;
-  object-fit:cover;
-}
-
-.moment-side img{
-  height:330px;
-  object-fit:cover;
-  margin-bottom:28px;
-}
-
-.moment-side h3{
-  color:var(--blue);
-  font-size:42px;
-  font-weight:400;
-  margin-bottom:12px;
-}
-
-.moment-side p{
-  font-size:18px;
-  line-height:1.6;
-  color:var(--muted);
-}
-
-/* ================= FEATURE STRIP ================= */
-
-.food-feature{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  min-height:720px;
-}
-
-.food-feature-image{
-  background:url("bruschette.jpg") center/cover;
-}
-
-.food-feature-copy{
-  background:var(--terracotta);
-  color:white;
-  display:flex;
-  align-items:center;
-  padding:80px;
-}
-
-.food-feature-copy > div{
-  max-width:500px;
-}
-
-.food-feature-copy .label{
-  color:#f1c7b8;
-}
-
-.food-feature-copy h2{
-  font-size:clamp(55px,6vw,90px);
-  font-weight:400;
-  line-height:.95;
-  margin-bottom:35px;
-}
-
-.food-feature-copy p{
-  font-size:21px;
-  line-height:1.65;
-}
-
-/* ================= MENU ================= */
-
-.menu{
-  background:var(--paper);
-}
-
-.menu-header{
-  text-align:center;
-  max-width:760px;
-  margin:0 auto 65px;
-}
-
-.menu-header .display{
-  margin-bottom:25px;
-}
-
-.menu-header p{
-  font-size:20px;
-  color:var(--muted);
-}
-
-.menu-tabs{
-  display:flex;
-  justify-content:center;
-  flex-wrap:wrap;
-  gap:8px;
-  margin-bottom:60px;
-}
-
-.menu-tab{
-  border:1px solid var(--blue);
-  color:var(--blue);
-  background:transparent;
-  padding:13px 21px;
-  border-radius:100px;
-  font-family:var(--sans);
-  font-size:10px;
-  text-transform:uppercase;
-  letter-spacing:1.4px;
-  cursor:pointer;
-  transition:.25s;
-}
-
-.menu-tab:hover,
-.menu-tab.active{
-  background:var(--blue);
-  color:white;
-}
-
-.menu-panel{
-  display:none;
-  max-width:900px;
-  margin:auto;
-}
-
-.menu-panel.active{
-  display:block;
-  animation:menuFade .4s ease;
-}
-
-@keyframes menuFade{
-  from{opacity:0;transform:translateY(8px);}
-  to{opacity:1;transform:none;}
-}
-
-.menu-group{
-  margin-bottom:60px;
-}
-
-.menu-group-title{
-  display:flex;
-  justify-content:space-between;
-  align-items:flex-end;
-  border-bottom:1px solid rgba(38,63,120,.25);
-  padding-bottom:12px;
-  margin-bottom:7px;
-}
-
-.menu-group h3{
-  color:var(--terracotta);
-  font-weight:400;
-  font-size:42px;
-}
-
-.menu-group-sub{
-  font-family:var(--sans);
-  text-transform:uppercase;
-  letter-spacing:1.4px;
-  color:var(--muted);
-  font-size:9px;
-  margin-bottom:20px;
-}
-
-.menu-item{
-  display:grid;
-  grid-template-columns:1fr auto;
-  gap:20px;
-  padding:15px 0;
-  border-bottom:1px dotted rgba(38,63,120,.16);
-}
-
-.menu-name{
-  color:var(--blue);
-  font-size:19px;
-}
-
-.menu-desc{
-  display:block;
-  font-family:var(--sans);
-  font-size:12px;
-  line-height:1.5;
-  color:var(--muted);
-  margin-top:4px;
-}
-
-.menu-price{
-  color:var(--terracotta);
-  font-size:18px;
-  white-space:nowrap;
-}
-
-.menu-note{
-  max-width:700px;
-  margin:60px auto 0;
-  text-align:center;
-  font-family:var(--sans);
-  font-size:11px;
-  color:var(--muted);
-  line-height:1.7;
-}
-
-/* ================= COFFEE FEATURE ================= */
-
-.coffee-feature{
-  background:var(--blue);
-  padding:0;
-  display:grid;
-  grid-template-columns:.8fr 1.2fr;
-}
-
-.coffee-text{
-  color:white;
-  padding:100px 70px;
-  display:flex;
-  align-items:center;
-}
-
-.coffee-text .label{
-  color:#dca998;
-}
-
-.coffee-text h2{
-  font-weight:400;
-  font-size:clamp(55px,6vw,90px);
-  line-height:.95;
-  margin-bottom:30px;
-}
-
-.coffee-text p{
-  font-size:20px;
-  line-height:1.65;
-}
-
-.coffee-image img{
-  height:100%;
-  min-height:700px;
-  object-fit:cover;
-}
-
-/* ================= VISIT ================= */
-
-.visit{
-  background:var(--cream);
-}
-
-.visit-layout{
-  display:grid;
-  grid-template-columns:1.15fr .85fr;
-  gap:80px;
-  align-items:center;
-}
-
-.visit-image{
-  position:relative;
-}
-
-.visit-image img{
-  height:650px;
-  object-fit:cover;
-}
-
-.visit-card{
-  background:var(--paper);
-  padding:60px;
-}
-
-.visit-card .display{
-  margin-bottom:40px;
-}
-
-.visit-block{
-  padding:22px 0;
-  border-top:1px solid rgba(38,63,120,.2);
-}
-
-.visit-block h3{
-  font-family:var(--sans);
-  font-size:10px;
-  letter-spacing:2px;
-  text-transform:uppercase;
-  color:var(--terracotta);
-  margin-bottom:10px;
-}
-
-.visit-block p,
-.visit-block a{
-  color:var(--blue);
-  font-size:19px;
-  line-height:1.6;
-}
-
-.visit-actions{
-  display:flex;
-  flex-wrap:wrap;
-  gap:10px;
-  margin-top:35px;
-}
-
-.btn{
-  display:inline-flex;
-  justify-content:center;
-  align-items:center;
-  min-height:48px;
-  padding:12px 22px;
-  border-radius:100px;
-  font-family:var(--sans);
-  font-size:10px;
-  letter-spacing:1.5px;
-  text-transform:uppercase;
-  transition:.25s;
-}
-
-.btn-blue{
-  background:var(--blue);
-  color:white;
-}
-
-.btn-terra{
-  border:1px solid var(--terracotta);
-  color:var(--terracotta);
-}
-
-.btn:hover{
-  transform:translateY(-2px);
-}
-
-/* ================= SOCIAL ================= */
-
-.social{
-  background:var(--terracotta);
-  color:white;
-  text-align:center;
-  padding:100px 30px;
-}
-
-.social .label{
-  color:#f1c7b8;
-}
-
-.social h2{
-  font-size:clamp(55px,8vw,100px);
-  line-height:.9;
-  font-weight:400;
-  margin-bottom:25px;
-}
-
-.social p{
-  font-size:25px;
-  font-style:italic;
-  margin-bottom:35px;
-}
-
-.social .btn{
-  border:1px solid white;
-  color:white;
-}
-
-/* ================= FOOTER ================= */
-
-footer{
-  background:var(--blue-dark);
-  color:white;
-  padding:70px 35px 30px;
-}
-
-.footer{
-  max-width:1200px;
-  margin:auto;
-  display:grid;
-  grid-template-columns:1.4fr 1fr 1fr;
-  gap:70px;
-}
-
-.footer-logo{
-  width:135px;
-  background:white;
-  border-radius:50%;
-  padding:7px;
-  margin-bottom:25px;
-}
-
-footer h4{
-  font-family:var(--sans);
-  text-transform:uppercase;
-  letter-spacing:2px;
-  font-size:10px;
-  color:#dca998;
-  margin-bottom:18px;
-}
-
-footer p,
-footer a{
-  font-size:16px;
-  line-height:1.8;
-}
-
-.footer-bottom{
-  max-width:1200px;
-  margin:55px auto 0;
-  border-top:1px solid rgba(255,255,255,.15);
-  padding-top:25px;
-  font-family:var(--sans);
-  font-size:10px;
-  letter-spacing:1px;
-  opacity:.65;
-  display:flex;
-  justify-content:space-between;
-}
-
-/* ================= MOBILE ================= */
-
-@media(max-width:850px){
-
-  .nav{
-    position:absolute;
-  }
-
-  .nav-inner{
-    padding:15px 18px;
-  }
-
-  .nav-logo{
-    width:65px;
-  }
-
-  .nav-links a:not(.nav-button){
-    display:none;
-  }
-
-  .hero{
-    min-height:780px;
-  }
-
-  .hero-content{
-    padding:150px 22px 55px;
-  }
-
-  .hero h1{
-    letter-spacing:-2px;
-  }
-
-  .hero-line{
-    align-items:flex-start;
-  }
-
-  .circle-link{
-    width:95px;
-    height:95px;
-    flex-basis:95px;
-  }
-
-  .section{
-    padding:85px 22px;
-  }
-
-  .story-layout,
-  .visit-layout{
-    grid-template-columns:1fr;
-    gap:55px;
-  }
-
-  .story-photo img,
-  .visit-image img{
-    height:520px;
-  }
-
-  .story-photo::after{
-    right:15px;
-    bottom:-35px;
-  }
-
-  .moment-tabs{
-    overflow-x:auto;
-    justify-content:flex-start;
-  }
-
-  .moment-tab{
-    flex:0 0 auto;
-    font-size:23px;
-  }
-
-  .moment-content,
-  .food-feature,
-  .coffee-feature{
-    grid-template-columns:1fr;
-  }
-
-  .moment-main img{
-    height:480px;
-  }
-
-  .moment-side img{
-    height:320px;
-  }
-
-  .food-feature-image{
-    min-height:500px;
-  }
-
-  .food-feature-copy,
-  .coffee-text{
-    padding:70px 25px;
-  }
-
-  .coffee-image img{
-    min-height:0;
-    height:520px;
-  }
-
-  .visit-card{
-    padding:40px 25px;
-  }
-
-  .footer{
-    grid-template-columns:1fr;
-    gap:45px;
-  }
-
-  .footer-bottom{
-    flex-direction:column;
-    gap:8px;
-  }
-
-}
-
-@media(max-width:520px){
-
-  .hero-line{
-    display:block;
-  }
-
-  .circle-link{
-    margin-top:30px;
-  }
-
-  .story-copy p{
-    font-size:18px;
-  }
-
-  .moment-content{
-    gap:25px;
-  }
-
-  .menu-group h3{
-    font-size:34px;
-  }
-
-  .menu-item{
-    gap:12px;
-  }
-
-  .menu-name{
-    font-size:17px;
-  }
-
-  .menu-price{
-    font-size:16px;
-  }
-
-}
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>i Mulini Caffè Mediterraneo | Vienna</title>
+
+  <meta
+    name="description"
+    content="i Mulini Caffè Mediterraneo in Vienna. Italian coffee, cornetti, sfogliatelle, focaccia, Mediterranean food and aperitivo."
+  >
+
+  <!-- FONT -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&display=swap"
+    rel="stylesheet"
+  >
+
+  <style>
+
+    /* =========================================================
+       I MULINI — DESIGN SYSTEM
+    ========================================================= */
+
+    :root {
+      --blue: #263f78;
+      --blue-dark: #17294f;
+
+      --terracotta: #883120;
+      --terracotta-soft: #a9513e;
+
+      --cream: #f5efe6;
+      --paper: #fffaf3;
+      --white: #fffdf9;
+
+      --ink: #22201e;
+      --muted: #706a64;
+
+      --serif: "Instrument Serif", Georgia, serif;
+      --sans: -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
+    }
+
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+
+    body {
+      background: var(--cream);
+      color: var(--ink);
+      font-family: var(--serif);
+      overflow-x: hidden;
+    }
+
+
+    img {
+      display: block;
+      width: 100%;
+    }
+
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+
+    button {
+      font: inherit;
+    }
+
+
+    ::selection {
+      background: var(--terracotta);
+      color: white;
+    }
+
+
+
+    /* =========================================================
+       NAVIGATION
+    ========================================================= */
+
+    .nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+
+      z-index: 1000;
+
+      transition:
+        background .35s ease,
+        border .35s ease;
+    }
+
+
+    .nav-inner {
+      max-width: 1400px;
+      margin: auto;
+
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      padding: 18px 35px;
+    }
+
+
+    .nav-logo {
+      width: 78px;
+
+      transition:
+        width .3s ease,
+        transform .3s ease;
+    }
+
+
+    .nav-logo:hover {
+      transform: rotate(-3deg);
+    }
+
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+
+      font-family: var(--sans);
+      font-size: 11px;
+
+      text-transform: uppercase;
+      letter-spacing: 1.8px;
+
+      color: white;
+    }
+
+
+    .nav-links a {
+      transition: opacity .2s ease;
+    }
+
+
+    .nav-links a:hover {
+      opacity: .6;
+    }
+
+
+    .nav-button {
+      padding: 11px 19px;
+
+      border: 1px solid currentColor;
+      border-radius: 100px;
+    }
+
+
+    .nav.scrolled {
+      background: rgba(245, 239, 230, .96);
+
+      backdrop-filter: blur(16px);
+
+      border-bottom: 1px solid rgba(38, 63, 120, .12);
+    }
+
+
+    .nav.scrolled .nav-links {
+      color: var(--blue);
+    }
+
+
+    .nav.scrolled .nav-logo {
+      width: 62px;
+    }
+
+
+
+    /* =========================================================
+       HERO
+    ========================================================= */
+
+    .hero {
+      position: relative;
+
+      min-height: 94vh;
+
+      display: flex;
+      align-items: flex-end;
+
+      overflow: hidden;
+    }
+
+
+    .hero-background {
+      position: absolute;
+      inset: 0;
+
+      background:
+        linear-gradient(
+          to bottom,
+          rgba(15, 28, 55, .08),
+          rgba(15, 28, 55, .15) 45%,
+          rgba(15, 28, 55, .76)
+        ),
+        url("facade.jpg") center center / cover no-repeat;
+
+      transform: scale(1.06);
+
+      transition: transform 8s ease;
+    }
+
+
+    body.loaded .hero-background {
+      transform: scale(1);
+    }
+
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+
+      width: 100%;
+      max-width: 1400px;
+
+      margin: auto;
+
+      padding:
+        170px
+        45px
+        75px;
+
+      color: white;
+    }
+
+
+    .eyebrow {
+      font-family: var(--sans);
+
+      font-size: 10px;
+
+      text-transform: uppercase;
+
+      letter-spacing: 4px;
+
+      margin-bottom: 25px;
+    }
+
+
+    .hero-title {
+      font-weight: 400;
+
+      font-size:
+        clamp(82px, 13vw, 180px);
+
+      line-height: .72;
+
+      letter-spacing: -4px;
+    }
+
+
+    .hero-title span {
+      display: block;
+
+      margin-top: 38px;
+
+      font-family: var(--sans);
+
+      font-size: clamp(11px, 1.3vw, 17px);
+
+      letter-spacing: 6px;
+
+      text-transform: uppercase;
+    }
+
+
+    .hero-bottom {
+      margin-top: 55px;
+
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+
+      gap: 50px;
+    }
+
+
+    .hero-intro {
+      max-width: 600px;
+
+      font-size:
+        clamp(23px, 2.5vw, 34px);
+
+      line-height: 1.28;
+    }
+
+
+    .hero-circle {
+      width: 125px;
+      height: 125px;
+
+      flex: 0 0 125px;
+
+      border:
+        1px solid rgba(255, 255, 255, .8);
+
+      border-radius: 50%;
+
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      text-align: center;
+
+      font-family: var(--sans);
+
+      font-size: 9px;
+
+      letter-spacing: 1.5px;
+
+      text-transform: uppercase;
+
+      transition:
+        background .3s ease,
+        color .3s ease,
+        transform .3s ease;
+    }
+
+
+    .hero-circle:hover {
+      background: white;
+      color: var(--blue);
+
+      transform: rotate(-6deg);
+    }
+
+
+
+    /* =========================================================
+       WALK INS
+    ========================================================= */
+
+    .walkins {
+      background: var(--terracotta);
+
+      color: white;
+
+      padding: 17px 20px;
+
+      text-align: center;
+
+      font-family: var(--sans);
+
+      font-size: 10px;
+
+      letter-spacing: 3px;
+
+      text-transform: uppercase;
+    }
+
+
+
+    /* =========================================================
+       GLOBAL SECTIONS
+    ========================================================= */
+
+    .section {
+      padding: 125px 35px;
+    }
+
+
+    .container {
+      width: 100%;
+
+      max-width: 1200px;
+
+      margin: auto;
+    }
+
+
+    .label {
+      margin-bottom: 25px;
+
+      font-family: var(--sans);
+
+      font-size: 10px;
+
+      text-transform: uppercase;
+
+      letter-spacing: 3px;
+
+      color: var(--terracotta);
+    }
+
+
+    .display {
+      color: var(--blue);
+
+      font-weight: 400;
+
+      font-size:
+        clamp(55px, 7vw, 100px);
+
+      line-height: .92;
+
+      letter-spacing: -2px;
+    }
+
+
+    .reveal {
+      opacity: 0;
+
+      transform: translateY(35px);
+
+      transition:
+        opacity .85s ease,
+        transform .85s ease;
+    }
+
+
+    .reveal.visible {
+      opacity: 1;
+
+      transform: translateY(0);
+    }
+
+
+
+    /* =========================================================
+       STORY
+    ========================================================= */
+
+    .story {
+      background: var(--paper);
+    }
+
+
+    .story-layout {
+      display: grid;
+
+      grid-template-columns:
+        .95fr 1.05fr;
+
+      gap: 95px;
+
+      align-items: center;
+    }
+
+
+    .story-image {
+      position: relative;
+    }
+
+
+    .story-image img {
+      height: 680px;
+
+      object-fit: cover;
+    }
+
+
+    .story-stamp {
+      position: absolute;
+
+      right: -40px;
+      bottom: 65px;
+
+      width: 120px;
+      height: 120px;
+
+      border-radius: 50%;
+
+      background: var(--terracotta);
+
+      color: white;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      text-align: center;
+
+      font-size: 22px;
+
+      font-style: italic;
+
+      transform: rotate(-8deg);
+    }
+
+
+    .story-copy {
+      max-width: 560px;
+    }
+
+
+    .story-copy .display {
+      margin-bottom: 42px;
+    }
+
+
+    .story-copy p {
+      margin-bottom: 22px;
+
+      font-size: 20px;
+
+      line-height: 1.68;
+    }
+
+
+    .story-phrase {
+      margin-top: 38px !important;
+
+      color: var(--terracotta);
+
+      font-size: 32px !important;
+
+      font-style: italic;
+    }
+
+
+
+    /* =========================================================
+       BLUE STATEMENT
+    ========================================================= */
+
+    .statement {
+      background: var(--blue);
+
+      color: white;
+
+      padding: 125px 35px;
+
+      text-align: center;
+    }
+
+
+    .statement-inner {
+      max-width: 1100px;
+
+      margin: auto;
+    }
+
+
+    .statement .label {
+      color: #dba999;
+    }
+
+
+    .statement h2 {
+      font-weight: 400;
+
+      font-size:
+        clamp(55px, 8vw, 110px);
+
+      line-height: .92;
+    }
+
+
+    .statement em {
+      color: #e1ad9b;
+
+      font-weight: 400;
+    }
+
+
+
+    /* =========================================================
+       DAY EXPERIENCE
+    ========================================================= */
+
+    .experience {
+      background: var(--cream);
+    }
+
+
+    .experience-heading {
+      max-width: 800px;
+
+      margin-bottom: 70px;
+    }
+
+
+    .experience-tabs {
+      display: flex;
+
+      gap: 45px;
+
+      border-bottom:
+        1px solid rgba(38, 63, 120, .22);
+
+      margin-bottom: 55px;
+    }
+
+
+    .experience-tab {
+      position: relative;
+
+      border: none;
+
+      background: transparent;
+
+      padding: 0 0 17px;
+
+      color: var(--blue);
+
+      font-size: 30px;
+
+      opacity: .38;
+
+      cursor: pointer;
+
+      transition:
+        opacity .25s ease,
+        color .25s ease;
+    }
+
+
+    .experience-tab:hover {
+      opacity: .7;
+    }
+
+
+    .experience-tab.active {
+      opacity: 1;
+
+      color: var(--terracotta);
+    }
+
+
+    .experience-tab.active::after {
+      content: "";
+
+      position: absolute;
+
+      height: 2px;
+
+      left: 0;
+      right: 0;
+      bottom: -1px;
+
+      background: var(--terracotta);
+    }
+
+
+    .experience-panel {
+      display: none;
+
+      grid-template-columns:
+        1.25fr .75fr;
+
+      gap: 45px;
+
+      align-items: end;
+    }
+
+
+    .experience-panel.active {
+      display: grid;
+
+      animation:
+        panelAppear .55s ease;
+    }
+
+
+    @keyframes panelAppear {
+
+      from {
+        opacity: 0;
+
+        transform:
+          translateY(12px);
+      }
+
+      to {
+        opacity: 1;
+
+        transform:
+          translateY(0);
+      }
+
+    }
+
+
+    .experience-large img {
+      height: 620px;
+
+      object-fit: cover;
+    }
+
+
+    .experience-small img {
+      height: 330px;
+
+      object-fit: cover;
+
+      margin-bottom: 28px;
+    }
+
+
+    .experience-small h3 {
+      margin-bottom: 10px;
+
+      color: var(--blue);
+
+      font-size: 45px;
+
+      font-weight: 400;
+    }
+
+
+    .experience-small p {
+      color: var(--muted);
+
+      font-family: var(--sans);
+
+      font-size: 14px;
+
+      line-height: 1.7;
+    }
+
+
+
+    /* =========================================================
+       BRUSCHETTE FEATURE
+    ========================================================= */
+
+    .food-feature {
+      min-height: 720px;
+
+      display: grid;
+
+      grid-template-columns:
+        1.1fr .9fr;
+    }
+
+
+    .food-feature-image {
+      background:
+        url("bruschette.jpg")
+        center / cover no-repeat;
+    }
+
+
+    .food-feature-copy {
+      background:
+        var(--terracotta);
+
+      color: white;
+
+      padding: 80px;
+
+      display: flex;
+
+      align-items: center;
+    }
+
+
+    .food-feature-copy > div {
+      max-width: 510px;
+    }
+
+
+    .food-feature-copy .label {
+      color: #edc2b4;
+    }
+
+
+    .food-feature-copy h2 {
+      margin-bottom: 30px;
+
+      font-weight: 400;
+
+      font-size:
+        clamp(58px, 6vw, 95px);
+
+      line-height: .92;
+    }
+
+
+    .food-feature-copy p {
+      max-width: 450px;
+
+      font-family: var(--sans);
+
+      font-size: 15px;
+
+      line-height: 1.75;
+    }
+
+
+
+    /* =========================================================
+       MENU
+    ========================================================= */
+
+    .menu-section {
+      background: var(--paper);
+    }
+
+
+    .menu-heading {
+      max-width: 760px;
+
+      margin:
+        0 auto 65px;
+
+      text-align: center;
+    }
+
+
+    .menu-heading .display {
+      margin-bottom: 25px;
+    }
+
+
+    .menu-heading p {
+      color: var(--muted);
+
+      font-family: var(--sans);
+
+      font-size: 14px;
+
+      line-height: 1.7;
+    }
+
+
+    .menu-tabs {
+      display: flex;
+
+      justify-content: center;
+
+      flex-wrap: wrap;
+
+      gap: 8px;
+
+      margin-bottom: 65px;
+    }
+
+
+    .menu-tab {
+      border:
+        1px solid var(--blue);
+
+      border-radius: 100px;
+
+      background: transparent;
+
+      color: var(--blue);
+
+      padding: 13px 22px;
+
+      font-family: var(--sans);
+
+      font-size: 9px;
+
+      letter-spacing: 1.5px;
+
+      text-transform: uppercase;
+
+      cursor: pointer;
+
+      transition:
+        background .25s ease,
+        color .25s ease,
+        transform .25s ease;
+    }
+
+
+    .menu-tab:hover {
+      transform: translateY(-2px);
+    }
+
+
+    .menu-tab.active {
+      background: var(--blue);
+
+      color: white;
+    }
+
+
+    .menu-panel {
+      display: none;
+
+      max-width: 900px;
+
+      margin: auto;
+    }
+
+
+    .menu-panel.active {
+      display: block;
+
+      animation:
+        menuAppear .4s ease;
+    }
+
+
+    @keyframes menuAppear {
+
+      from {
+        opacity: 0;
+        transform: translateY(8px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+    }
+
+
+    .menu-group {
+      margin-bottom: 65px;
+    }
+
+
+    .menu-group-header {
+      padding-bottom: 12px;
+
+      margin-bottom: 6px;
+
+      border-bottom:
+        1px solid rgba(38, 63, 120, .25);
+    }
+
+
+    .menu-group h3 {
+      color: var(--terracotta);
+
+      font-size: 44px;
+
+      font-weight: 400;
+    }
+
+
+    .menu-subtitle {
+      margin:
+        10px 0 18px;
+
+      color: var(--muted);
+
+      font-family: var(--sans);
+
+      font-size: 9px;
+
+      letter-spacing: 1.4px;
+
+      text-transform: uppercase;
+    }
+
+
+    .menu-item {
+      display: grid;
+
+      grid-template-columns:
+        1fr auto;
+
+      gap: 20px;
+
+      padding: 15px 0;
+
+      border-bottom:
+        1px dotted rgba(38, 63, 120, .16);
+    }
+
+
+    .menu-name {
+      color: var(--blue);
+
+      font-size: 20px;
+    }
+
+
+    .menu-description {
+      display: block;
+
+      margin-top: 5px;
+
+      color: var(--muted);
+
+      font-family: var(--sans);
+
+      font-size: 12px;
+
+      line-height: 1.55;
+    }
+
+
+    .menu-price {
+      color: var(--terracotta);
+
+      font-family: var(--sans);
+
+      font-size: 13px;
+
+      white-space: nowrap;
+    }
+
+
+    .menu-note {
+      max-width: 700px;
+
+      margin: 60px auto 0;
+
+      text-align: center;
+
+      color: var(--muted);
+
+      font-family: var(--sans);
+
+      font-size: 10px;
+
+      line-height: 1.8;
+    }
+
+
+
+    /* =========================================================
+       COFFEE FEATURE
+    ========================================================= */
+
+    .coffee-feature {
+      display: grid;
+
+      grid-template-columns:
+        .85fr 1.15fr;
+
+      background:
+        var(--blue);
+
+      color: white;
+    }
+
+
+    .coffee-copy {
+      padding: 100px 70px;
+
+      display: flex;
+
+      align-items: center;
+    }
+
+
+    .coffee-copy .label {
+      color: #e1ad9b;
+    }
+
+
+    .coffee-copy h2 {
+      margin-bottom: 30px;
+
+      font-size:
+        clamp(60px, 6vw, 95px);
+
+      font-weight: 400;
+
+      line-height: .92;
+    }
+
+
+    .coffee-copy p {
+      max-width: 420px;
+
+      font-family: var(--sans);
+
+      font-size: 14px;
+
+      line-height: 1.75;
+    }
+
+
+    .coffee-photo img {
+      height: 100%;
+
+      min-height: 700px;
+
+      object-fit: cover;
+    }
+
+
+
+    /* =========================================================
+       VISIT
+    ========================================================= */
+
+    .visit {
+      background:
+        var(--cream);
+    }
+
+
+    .visit-layout {
+      display: grid;
+
+      grid-template-columns:
+        1.1fr .9fr;
+
+      gap: 75px;
+
+      align-items: center;
+    }
+
+
+    .visit-photo img {
+      height: 660px;
+
+      object-fit: cover;
+    }
+
+
+    .visit-content {
+      background: var(--paper);
+
+      padding: 60px;
+    }
+
+
+    .visit-content .display {
+      margin-bottom: 42px;
+    }
+
+
+    .visit-block {
+      padding: 21px 0;
+
+      border-top:
+        1px solid rgba(38, 63, 120, .18);
+    }
+
+
+    .visit-block h3 {
+      margin-bottom: 9px;
+
+      color: var(--terracotta);
+
+      font-family: var(--sans);
+
+      font-size: 9px;
+
+      letter-spacing: 2px;
+
+      text-transform: uppercase;
+    }
+
+
+    .visit-block p,
+    .visit-block a {
+      color: var(--blue);
+
+      font-size: 19px;
+
+      line-height: 1.55;
+    }
+
+
+    .visit-buttons {
+      display: flex;
+
+      flex-wrap: wrap;
+
+      gap: 10px;
+
+      margin-top: 32px;
+    }
+
+
+    .button {
+      min-height: 48px;
+
+      padding: 12px 22px;
+
+      border-radius: 100px;
+
+      display: inline-flex;
+
+      justify-content: center;
+      align-items: center;
+
+      font-family: var(--sans);
+
+      font-size: 9px;
+
+      letter-spacing: 1.5px;
+
+      text-transform: uppercase;
+
+      transition:
+        transform .25s ease,
+        background .25s ease,
+        color .25s ease;
+    }
+
+
+    .button:hover {
+      transform:
+        translateY(-2px);
+    }
+
+
+    .button-blue {
+      background: var(--blue);
+
+      color: white;
+    }
+
+
+    .button-outline {
+      border:
+        1px solid var(--terracotta);
+
+      color: var(--terracotta);
+    }
+
+
+
+    /* =========================================================
+       SOCIAL
+    ========================================================= */
+
+    .social {
+      padding: 105px 30px;
+
+      background:
+        var(--terracotta);
+
+      color: white;
+
+      text-align: center;
+    }
+
+
+    .social .label {
+      color: #edc2b4;
+    }
+
+
+    .social h2 {
+      margin-bottom: 25px;
+
+      font-size:
+        clamp(60px, 8vw, 105px);
+
+      font-weight: 400;
+
+      line-height: .88;
+    }
+
+
+    .social p {
+      margin-bottom: 35px;
+
+      font-size: 27px;
+
+      font-style: italic;
+    }
+
+
+    .social .button {
+      border:
+        1px solid white;
+
+      color: white;
+    }
+
+
+
+    /* =========================================================
+       FOOTER
+    ========================================================= */
+
+    footer {
+      background:
+        var(--blue-dark);
+
+      color: white;
+
+      padding:
+        70px 35px 30px;
+    }
+
+
+    .footer-grid {
+      max-width: 1200px;
+
+      margin: auto;
+
+      display: grid;
+
+      grid-template-columns:
+        1.4fr 1fr 1fr;
+
+      gap: 70px;
+    }
+
+
+    .footer-logo {
+      width: 125px;
+
+      margin-bottom: 25px;
+
+      background: white;
+
+      border-radius: 50%;
+
+      padding: 6px;
+    }
+
+
+    footer h4 {
+      margin-bottom: 18px;
+
+      color: #e1ad9b;
+
+      font-family: var(--sans);
+
+      font-size: 9px;
+
+      letter-spacing: 2px;
+
+      text-transform: uppercase;
+    }
+
+
+    footer p,
+    footer a {
+      font-size: 17px;
+
+      line-height: 1.8;
+    }
+
+
+    .footer-bottom {
+      max-width: 1200px;
+
+      margin:
+        55px auto 0;
+
+      padding-top: 25px;
+
+      border-top:
+        1px solid rgba(255, 255, 255, .15);
+
+      display: flex;
+
+      justify-content: space-between;
+
+      gap: 20px;
+
+      font-family: var(--sans);
+
+      font-size: 9px;
+
+      letter-spacing: 1px;
+
+      opacity: .65;
+    }
+
+
+
+    /* =========================================================
+       MOBILE
+    ========================================================= */
+
+    @media (max-width: 850px) {
+
+      .nav {
+        position: absolute;
+      }
+
+
+      .nav-inner {
+        padding:
+          15px 18px;
+      }
+
+
+      .nav-logo {
+        width: 65px;
+      }
+
+
+      .nav-links a:not(.nav-button) {
+        display: none;
+      }
+
+
+      .hero {
+        min-height: 760px;
+      }
+
+
+      .hero-content {
+        padding:
+          145px 22px 55px;
+      }
+
+
+      .hero-title {
+        letter-spacing: -2px;
+      }
+
+
+      .hero-bottom {
+        align-items: flex-start;
+      }
+
+
+      .hero-circle {
+        width: 95px;
+        height: 95px;
+
+        flex-basis: 95px;
+      }
+
+
+      .section {
+        padding:
+          85px 22px;
+      }
+
+
+      .story-layout,
+      .visit-layout {
+        grid-template-columns: 1fr;
+
+        gap: 55px;
+      }
+
+
+      .story-image img,
+      .visit-photo img {
+        height: 520px;
+      }
+
+
+      .story-stamp {
+        right: 15px;
+
+        bottom: -35px;
+      }
+
+
+      .experience-tabs {
+        overflow-x: auto;
+
+        gap: 30px;
+      }
+
+
+      .experience-tab {
+        flex: 0 0 auto;
+
+        font-size: 24px;
+      }
+
+
+      .experience-panel {
+        grid-template-columns: 1fr;
+
+        gap: 25px;
+      }
+
+
+      .experience-large img {
+        height: 480px;
+      }
+
+
+      .experience-small img {
+        height: 330px;
+      }
+
+
+      .food-feature,
+      .coffee-feature {
+        grid-template-columns: 1fr;
+      }
+
+
+      .food-feature-image {
+        min-height: 520px;
+      }
+
+
+      .food-feature-copy,
+      .coffee-copy {
+        padding:
+          70px 25px;
+      }
+
+
+      .coffee-photo img {
+        min-height: 0;
+
+        height: 520px;
+      }
+
+
+      .visit-content {
+        padding:
+          42px 25px;
+      }
+
+
+      .footer-grid {
+        grid-template-columns: 1fr;
+
+        gap: 45px;
+      }
+
+
+      .footer-bottom {
+        flex-direction: column;
+      }
+
+    }
+
+
+
+    @media (max-width: 520px) {
+
+      .hero-bottom {
+        display: block;
+      }
+
+
+      .hero-circle {
+        margin-top: 32px;
+      }
+
+
+      .story-copy p {
+        font-size: 18px;
+      }
+
+
+      .menu-group h3 {
+        font-size: 36px;
+      }
+
+
+      .menu-name {
+        font-size: 18px;
+      }
+
+
+      .menu-item {
+        gap: 12px;
+      }
+
+
+      .menu-price {
+        font-size: 12px;
+      }
+
+    }
+
+
+
+    /* REDUCED MOTION */
+
+    @media (prefers-reduced-motion: reduce) {
+
+      * {
+        scroll-behavior: auto !important;
+        animation: none !important;
+        transition: none !important;
+      }
+
+
+      .reveal {
+        opacity: 1;
+        transform: none;
+      }
+
+    }
+
+  </style>
+
 </head>
+
+
 
 <body>
 
-<!-- NAVIGATION -->
+
+<!-- =========================================================
+     NAVIGATION
+========================================================= -->
 
 <nav class="nav" id="nav">
+
   <div class="nav-inner">
 
     <a href="#home">
-      <img class="nav-logo" src="logo.svg" alt="i Mulini Caffè Mediterraneo">
+
+      <img
+        src="logo.svg"
+        class="nav-logo"
+        alt="i Mulini Caffè Mediterraneo"
+      >
+
     </a>
 
+
     <div class="nav-links">
-      <a href="#story">Our Story</a>
-      <a href="#experience">Experience</a>
-      <a href="#menu">Menu</a>
-      <a href="#visit" class="nav-button">Visit us</a>
+
+      <a href="#story">
+        Our Story
+      </a>
+
+      <a href="#experience">
+        Experience
+      </a>
+
+      <a href="#menu">
+        Menu
+      </a>
+
+      <a
+        href="#visit"
+        class="nav-button"
+      >
+        Visit us
+      </a>
+
     </div>
 
   </div>
+
 </nav>
 
 
-<!-- HERO -->
 
-<header class="hero" id="home">
+<!-- =========================================================
+     HERO
+========================================================= -->
 
-  <div class="hero-image"></div>
+<header
+  class="hero"
+  id="home"
+>
+
+  <div class="hero-background"></div>
+
 
   <div class="hero-content">
 
-    <div class="kicker">
-      Positano · Napoli · Vienna
+    <div class="eyebrow">
+      Caffè Mediterraneo · Vienna
     </div>
 
-    <h1>
+
+    <h1 class="hero-title">
+
       i Mulini
-      <small>Caffè Mediterraneo</small>
+
+      <span>
+        Caffè Mediterraneo
+      </span>
+
     </h1>
 
-    <div class="hero-line">
 
-      <p class="hero-copy">
-        A little Mediterranean soul in the heart of Vienna.
+    <div class="hero-bottom">
+
+      <p class="hero-intro">
+        Italian coffee, Mediterranean flavours
+        and aperitivo in the heart of Vienna.
       </p>
 
-      <a href="#story" class="circle-link">
-        Discover<br>our story ↓
+
+      <a
+        href="#experience"
+        class="hero-circle"
+      >
+        Discover<br>
+        i Mulini ↓
       </a>
 
     </div>
@@ -1043,52 +1697,74 @@ footer a{
 </header>
 
 
+
+<!-- =========================================================
+     WALK INS
+========================================================= -->
+
 <div class="walkins">
+
   Walk-ins only — no reservations
+
 </div>
 
 
-<!-- STORY -->
 
-<section class="section story" id="story">
+<!-- =========================================================
+     STORY
+========================================================= -->
+
+<section
+  class="section story"
+  id="story"
+>
 
   <div class="container story-layout">
 
-    <div class="story-photo reveal">
-      <img src="robertgiorgio.jpg" alt="i Mulini Caffè Mediterraneo">
+
+    <div class="story-image reveal">
+
+      <img
+        src="robertgiorgio.jpg"
+        alt="i Mulini Caffè Mediterraneo"
+      >
+
+      <div class="story-stamp">
+        i Mulini
+      </div>
+
     </div>
+
 
     <div class="story-copy reveal">
 
-      <div class="label">Our Story</div>
+      <div class="label">
+        Our Story
+      </div>
+
 
       <h2 class="display">
-        From Positano<br>to Vienna.
+        From Italy<br>
+        to Vienna.
       </h2>
 
-      <p>
-        i Mulini was born from a place close to our hearts:
-        Piazza dei Mulini in Positano.
-      </p>
 
       <p>
-        For family and friends, the piazza has always been a meeting point —
-        the place behind the simple phrase
-        <em>“Ci vediamo ai Mulini.”</em>
+        i Mulini is a Mediterranean café in Vienna,
+        bringing together Italian coffee,
+        breakfast, food and aperitivo.
       </p>
+
 
       <p>
-        That feeling of meeting, sharing and enjoying time together
-        travelled with us from the Amalfi Coast to Vienna.
+        A place to meet over a cappuccino,
+        share a focaccia,
+        enjoy a glass of wine
+        and stay a little longer.
       </p>
 
-      <p>
-        Giorgio brings the flavours and coffee culture of Naples,
-        while Robert brings a life shaped between Austria and Positano
-        and his passion for cocktails and aperitivo.
-      </p>
 
-      <p class="italian">
+      <p class="story-phrase">
         Ci vediamo ai Mulini.
       </p>
 
@@ -1099,20 +1775,28 @@ footer a{
 </section>
 
 
-<!-- MANIFESTO -->
 
-<section class="manifesto">
+<!-- =========================================================
+     STATEMENT
+========================================================= -->
 
-  <div class="manifesto-inner reveal">
+<section class="statement">
+
+  <div class="statement-inner reveal">
 
     <div class="label">
-      Caffè Mediterraneo
+      A day at i Mulini
     </div>
 
+
     <h2>
+
       Coffee in the <em>morning.</em><br>
+
       Mediterranean flavours at <em>lunch.</em><br>
+
       Aperitivo in the <em>evening.</em>
+
     </h2>
 
   </div>
@@ -1120,77 +1804,154 @@ footer a{
 </section>
 
 
-<!-- MOMENTS -->
 
-<section class="section moments" id="experience">
+<!-- =========================================================
+     INTERACTIVE EXPERIENCE
+========================================================= -->
+
+<section
+  class="section experience"
+  id="experience"
+>
 
   <div class="container">
 
-    <div class="moments-heading reveal">
-      <div class="label">A day at i Mulini</div>
+
+    <div class="experience-heading reveal">
+
+      <div class="label">
+        Your moment
+      </div>
+
+
       <h2 class="display">
-        Choose your moment.
+        From buongiorno<br>
+        to aperitivo.
       </h2>
+
     </div>
 
-    <div class="moment-tabs reveal">
 
-      <button class="moment-tab active" data-moment="morning">
+
+    <div
+      class="experience-tabs reveal"
+      role="tablist"
+      aria-label="Moments at i Mulini"
+    >
+
+
+      <button
+        class="experience-tab active"
+        data-experience="morning"
+        role="tab"
+        aria-selected="true"
+      >
         Morning
       </button>
 
-      <button class="moment-tab" data-moment="lunch">
+
+      <button
+        class="experience-tab"
+        data-experience="lunch"
+        role="tab"
+        aria-selected="false"
+      >
         Lunch
       </button>
 
-      <button class="moment-tab" data-moment="aperitivo">
+
+      <button
+        class="experience-tab"
+        data-experience="aperitivo"
+        role="tab"
+        aria-selected="false"
+      >
         Aperitivo
       </button>
 
+
     </div>
+
 
 
     <!-- MORNING -->
 
-    <div class="moment-content active" id="moment-morning">
+    <div
+      class="experience-panel active"
+      id="experience-morning"
+    >
 
-      <div class="moment-main reveal">
-        <img src="cappuccino.jpg" alt="Cappuccino at i Mulini">
+
+      <div class="experience-large">
+
+        <img
+          src="cappuccino.jpg"
+          alt="Cappuccino at i Mulini"
+        >
+
       </div>
 
-      <div class="moment-side reveal">
 
-        <img src="colazione.jpg" alt="Italian breakfast at i Mulini">
+      <div class="experience-small">
 
-        <h3>Buongiorno.</h3>
+        <img
+          src="colazione.jpg"
+          alt="Italian breakfast"
+        >
+
+
+        <h3>
+          Buongiorno.
+        </h3>
+
 
         <p>
-          Espresso, cappuccino, cornetti and sfogliatella —
-          the Italian way to start the day.
+          Espresso, cappuccino,
+          cornetti and sfogliatella.
+          A simple Italian morning.
         </p>
 
       </div>
 
     </div>
+
 
 
     <!-- LUNCH -->
 
-    <div class="moment-content" id="moment-lunch">
+    <div
+      class="experience-panel"
+      id="experience-lunch"
+    >
 
-      <div class="moment-main">
-        <img src="bruschette.jpg" alt="Mediterranean food at i Mulini">
+
+      <div class="experience-large">
+
+        <img
+          src="bruschette.jpg"
+          alt="Bruschette at i Mulini"
+        >
+
       </div>
 
-      <div class="moment-side">
 
-        <img src="tables.jpg" alt="i Mulini Vienna">
+      <div class="experience-small">
 
-        <h3>Mangia.</h3>
+        <img
+          src="tables.jpg"
+          alt="i Mulini Vienna"
+        >
+
+
+        <h3>
+          Mangia.
+        </h3>
+
 
         <p>
-          Focaccia, bruschette and Mediterranean plates
-          made for sharing.
+          Focaccia, bruschette
+          and Mediterranean plates
+          made to enjoy together.
         </p>
 
       </div>
@@ -1198,22 +1959,41 @@ footer a{
     </div>
 
 
+
     <!-- APERITIVO -->
 
-    <div class="moment-content" id="moment-aperitivo">
+    <div
+      class="experience-panel"
+      id="experience-aperitivo"
+    >
 
-      <div class="moment-main">
-        <img src="negroni.jpg" alt="Aperitivo at i Mulini">
+
+      <div class="experience-large">
+
+        <img
+          src="negroni.jpg"
+          alt="Negroni at i Mulini"
+        >
+
       </div>
 
-      <div class="moment-side">
 
-        <img src="giardino.jpg" alt="Aperitivo in Vienna">
+      <div class="experience-small">
 
-        <h3>Aperitivo.</h3>
+        <img
+          src="giardino.jpg"
+          alt="i Mulini outdoor seating"
+        >
+
+
+        <h3>
+          Aperitivo.
+        </h3>
+
 
         <p>
-          Negroni, Spritz, wine and Mediterranean bites.
+          Spritz, Negroni,
+          wine and Mediterranean bites.
           Stay a little longer.
         </p>
 
@@ -1221,30 +2001,43 @@ footer a{
 
     </div>
 
+
   </div>
 
 </section>
 
 
-<!-- FOOD FEATURE -->
+
+<!-- =========================================================
+     FOOD FEATURE
+========================================================= -->
 
 <section class="food-feature">
 
+
   <div class="food-feature-image"></div>
+
 
   <div class="food-feature-copy">
 
     <div class="reveal">
 
-      <div class="label">Mediterranean flavours</div>
+      <div class="label">
+        Mediterranean flavours
+      </div>
+
 
       <h2>
-        Made to<br>be shared.
+        Made to<br>
+        be shared.
       </h2>
 
+
       <p>
-        Focaccia, bruschette, Italian cheeses, cured meats
-        and little plates inspired by the Mediterranean.
+        Focaccia, bruschette,
+        Italian cheeses, cured meats
+        and Mediterranean plates
+        for the table.
       </p>
 
     </div>
@@ -1254,1013 +2047,1962 @@ footer a{
 </section>
 
 
-<!-- MENU -->
 
-<section class="section menu" id="menu">
+<!-- =========================================================
+     MENU
+========================================================= -->
 
-<div class="container">
+<section
+  class="section menu-section"
+  id="menu"
+>
 
-<div class="menu-header reveal">
+  <div class="container">
 
-  <div class="label">Our Menu</div>
 
-  <h2 class="display">
-    Mangia. Bevi.<br>Goditi.
-  </h2>
+    <div class="menu-heading reveal">
 
-  <p>
-    Italian classics, Mediterranean flavours and a little bit of Napoli.
-  </p>
+      <div class="label">
+        Our Menu
+      </div>
 
-</div>
 
+      <h2 class="display">
+        Mangia.<br>
+        Bevi. Goditi.
+      </h2>
 
-<div class="menu-tabs reveal">
 
-<button class="menu-tab active" data-menu="coffee">
-Coffee & Breakfast
-</button>
+      <p>
+        Explore the menu by category.
+      </p>
 
-<button class="menu-tab" data-menu="food">
-Food
-</button>
+    </div>
 
-<button class="menu-tab" data-menu="aperitivo">
-Aperitivo
-</button>
 
-<button class="menu-tab" data-menu="wine">
-Wine & Drinks
-</button>
 
-</div>
+    <div
+      class="menu-tabs reveal"
+      role="tablist"
+      aria-label="Menu categories"
+    >
 
 
-<!-- COFFEE -->
+      <button
+        class="menu-tab active"
+        data-menu="coffee"
+        aria-selected="true"
+      >
+        Coffee & Breakfast
+      </button>
 
-<div class="menu-panel active" id="menu-coffee">
 
-<div class="menu-group">
+      <button
+        class="menu-tab"
+        data-menu="food"
+        aria-selected="false"
+      >
+        Food
+      </button>
 
-<div class="menu-group-title">
-<h3>Caffè</h3>
-</div>
 
-<div class="menu-item"><span class="menu-name">Espresso</span><span class="menu-price">2.80</span></div>
-<div class="menu-item"><span class="menu-name">Cappuccino</span><span class="menu-price">4.80</span></div>
-<div class="menu-item"><span class="menu-name">Flat White</span><span class="menu-price">5.80</span></div>
-<div class="menu-item"><span class="menu-name">Doppio Espresso</span><span class="menu-price">4.60</span></div>
-<div class="menu-item"><span class="menu-name">Filter</span><span class="menu-price">6.00</span></div>
-<div class="menu-item"><span class="menu-name">Americano</span><span class="menu-price">3.80</span></div>
-<div class="menu-item"><span class="menu-name">Macchiato</span><span class="menu-price">3.70</span></div>
-<div class="menu-item"><span class="menu-name">Latte macchiato</span><span class="menu-price">6.40</span></div>
-<div class="menu-item"><span class="menu-name">Hot Chocolate</span><span class="menu-price">5.90</span></div>
-<div class="menu-item"><span class="menu-name">Vegan</span><span class="menu-price">+ 0.50</span></div>
+      <button
+        class="menu-tab"
+        data-menu="aperitivo"
+        aria-selected="false"
+      >
+        Aperitivo
+      </button>
 
-</div>
 
+      <button
+        class="menu-tab"
+        data-menu="wine"
+        aria-selected="false"
+      >
+        Wine & Drinks
+      </button>
 
-<div class="menu-group">
 
-<div class="menu-group-title">
-<h3>Sorsi di Sole</h3>
-</div>
+    </div>
 
-<div class="menu-item">
-<span class="menu-name">
-Spremuta d'arancia
-<span class="menu-desc">Fresh Orange Juice · 0.125 l</span>
-</span>
-<span class="menu-price">4.80</span>
-</div>
 
-<div class="menu-item">
-<span class="menu-name">
-Spremuta di pompelmo
-<span class="menu-desc">Fresh Grapefruit Juice · 0.125 l</span>
-</span>
-<span class="menu-price">4.90</span>
-</div>
 
-<div class="menu-item">
-<span class="menu-name">
-Almond Plant Drink
-<span class="menu-desc">0.125 l</span>
-</span>
-<span class="menu-price">4.80</span>
-</div>
+    <!-- =====================================================
+         COFFEE & BREAKFAST
+    ====================================================== -->
 
-</div>
+    <div
+      class="menu-panel active"
+      id="menu-coffee"
+    >
 
 
-<div class="menu-group">
+      <div class="menu-group">
 
-<div class="menu-group-title">
-<h3>Speciality di Matcha</h3>
-</div>
+        <div class="menu-group-header">
+          <h3>Caffè</h3>
+        </div>
 
-<div class="menu-item"><span class="menu-name">Iced Blueberry Coconut</span><span class="menu-price">9.80</span></div>
-<div class="menu-item"><span class="menu-name">Iced Matcha Orange</span><span class="menu-price">8.90</span></div>
-<div class="menu-item"><span class="menu-name">Matcha Latte</span><span class="menu-price">7.60</span></div>
 
-</div>
+        <div class="menu-item">
+          <span class="menu-name">Espresso</span>
+          <span class="menu-price">2.80</span>
+        </div>
 
 
-<div class="menu-group">
+        <div class="menu-item">
+          <span class="menu-name">Cappuccino</span>
+          <span class="menu-price">4.80</span>
+        </div>
 
-<div class="menu-group-title">
-<h3>Tee & Infusioni</h3>
-</div>
 
-<div class="menu-item"><span class="menu-name">Sencha Green</span><span class="menu-price">5.90</span></div>
-<div class="menu-item"><span class="menu-name">Mint Infusion</span><span class="menu-price">5.90</span></div>
-<div class="menu-item"><span class="menu-name">Cistus Herbal Tisana</span><span class="menu-price">5.90</span></div>
+        <div class="menu-item">
+          <span class="menu-name">Flat White</span>
+          <span class="menu-price">5.80</span>
+        </div>
 
-</div>
 
+        <div class="menu-item">
+          <span class="menu-name">Doppio Espresso</span>
+          <span class="menu-price">4.60</span>
+        </div>
 
-<div class="menu-group">
 
-<div class="menu-group-title">
-<h3>Colazione Italiana</h3>
-</div>
+        <div class="menu-item">
+          <span class="menu-name">Filter</span>
+          <span class="menu-price">6.00</span>
+        </div>
 
-<div class="menu-item"><span class="menu-name">Cornetto pistacchio</span><span class="menu-price">4.90</span></div>
-<div class="menu-item"><span class="menu-name">Cornetto crema vaniglia</span><span class="menu-price">4.60</span></div>
-<div class="menu-item"><span class="menu-name">Cornetto gianduja</span><span class="menu-price">4.20</span></div>
-<div class="menu-item"><span class="menu-name">Cornetto albicocca</span><span class="menu-price">3.90</span></div>
-<div class="menu-item"><span class="menu-name">Sfogliatella</span><span class="menu-price">4.50</span></div>
 
-</div>
+        <div class="menu-item">
+          <span class="menu-name">Americano</span>
+          <span class="menu-price">3.80</span>
+        </div>
 
 
-<div class="menu-group">
+        <div class="menu-item">
+          <span class="menu-name">Macchiato</span>
+          <span class="menu-price">3.70</span>
+        </div>
 
-<div class="menu-group-title">
-<h3>Colazione salata</h3>
-</div>
 
-<div class="menu-item">
-<span class="menu-name">
-Crostone
-<span class="menu-desc">Ham, artichoke spread & scamorza</span>
-</span>
-<span class="menu-price">9.80</span>
-</div>
+        <div class="menu-item">
+          <span class="menu-name">Latte macchiato</span>
+          <span class="menu-price">6.40</span>
+        </div>
 
-<div class="menu-item">
-<span class="menu-name">
-Cornetto salato
-<span class="menu-desc">Savoury filled croissant</span>
-</span>
-<span class="menu-price">8.20</span>
-</div>
 
-</div>
+        <div class="menu-item">
+          <span class="menu-name">Hot Chocolate</span>
+          <span class="menu-price">5.90</span>
+        </div>
 
-</div>
 
+        <div class="menu-item">
+          <span class="menu-name">Vegan</span>
+          <span class="menu-price">+0.50</span>
+        </div>
 
-<!-- FOOD -->
+      </div>
 
-<div class="menu-panel" id="menu-food">
 
-<div class="menu-group">
 
-<div class="menu-group-title">
-<h3>L'Aperitivo rinforzato</h3>
-</div>
+      <div class="menu-group">
 
-<div class="menu-group-sub">Hearty Plates to Share</div>
+        <div class="menu-group-header">
+          <h3>Sorsi di Sole</h3>
+        </div>
 
-<div class="menu-item">
-<span class="menu-name">Prosciutto e Pecorino
-<span class="menu-desc">Naturally aged artisan prosciutto & pecorino</span>
-</span>
-<span class="menu-price">17.90</span>
-</div>
 
-<div class="menu-item">
-<span class="menu-name">Bresaola e Fior di ricotta
-<span class="menu-desc">Air-dried Fassona beef & fresh ricotta</span>
-</span>
-<span class="menu-price">19.80</span>
-</div>
+        <div class="menu-item">
 
-<div class="menu-item">
-<span class="menu-name">Piatto aperitivo misto
-<span class="menu-desc">Selection of cheeses, cured meats, pickled vegetables & fruit preserve</span>
-</span>
-<span class="menu-price">18.90</span>
-</div>
+          <span class="menu-name">
 
-<div class="menu-item">
-<span class="menu-name">Piatto di Coppa
-<span class="menu-desc">Traditional dried-cured Coppa speciality</span>
-</span>
-<span class="menu-price">9.90</span>
-</div>
-
-<div class="menu-item">
-<span class="menu-name">Piatto di Mortadella
-<span class="menu-desc">Mortadella with pistachios</span>
-</span>
-<span class="menu-price">7.90</span>
-</div>
-
-<div class="menu-item">
-<span class="menu-name">Selezione di formaggi
-<span class="menu-desc">Hand-picked selection of cheeses & seasonal fruit preserve</span>
-</span>
-<span class="menu-price">18.90</span>
-</div>
-
-<div class="menu-item">
-<span class="menu-name">Porzione di pane
-<span class="menu-desc">Portion of house focaccia</span>
-</span>
-<span class="menu-price">3.10</span>
-</div>
-
-</div>
-
-
-<div class="menu-group">
-
-<div class="menu-group-title">
-<h3>La Focaccia</h3>
-</div>
-
-<div class="menu-group-sub">
-Mediterranean Focaccia Sandwiches
-</div>
-
-<div class="menu-item">
-<span class="menu-name">Giorgione 2.0
-<span class="menu-desc">Mortadella, rucola, fennel, confit tomatoes & scamorza</span>
-</span>
-<span class="menu-price">13.80</span>
-</div>
-
-<div class="menu-item">
-<span class="menu-name">Pecorino
-<span class="menu-desc">Salami, grilled pecorino, artichoke spread, rucola & confit tomatoes</span>
-</span>
-<span class="menu-price">12.80</span>
-</div>
-
-<div class="menu-item">
-<span class="menu-name">Vegetariana
-<span class="menu-desc">Zucchini, rucola, artichoke spread, confit tomatoes & scamorza</span>
-</span>
-<span class="menu-price">12.80</span>
-</div>
-
-<div class="menu-item">
-<span class="menu-name">N'coppa a Focaccia
-<span class="menu-desc">Air-dried ham speciality, pesto friarielli, scamorza & chilli</span>
-</span>
-<span class="menu-price">13.90</span>
-</div>
-
-<div class="menu-item">
-<span class="menu-name">iMulini
-<span class="menu-desc">Prosciutto, rucola, grilled zucchini, stracciatella & lemon zest</span>
-</span>
-<span class="menu-price">14.80</span>
-</div>
-
-</div>
-
-
-<div class="menu-group">
-
-<div class="menu-group-title">
-<h3>i Sfizi Classici</h3>
-</div>
-
-<div class="menu-group-sub">
-Tempting & Savoury Delights
-</div>
-
-<div class="menu-item">
-<span class="menu-name">Porzione di olive e mandorle
-<span class="menu-desc">Olives & oven-roasted almonds</span>
-</span>
-<span class="menu-price">9.20</span>
-</div>
-
-<div class="menu-item">
-<span class="menu-name">Pane, burro & alici
-<span class="menu-desc">Bread with butter & Cetara anchovies</span>
-</span>
-<span class="menu-price">8.80</span>
-</div>
-
-<div class="menu-item">
-<span class="menu-name">Baccalà mantecato
-<span class="menu-desc">Creamed cod on crispy bruschetta</span>
-</span>
-<span class="menu-price">8.50</span>
-</div>
-
-<div class="menu-item">
-<span class="menu-name">Bruschette Alici di Cetara
-<span class="menu-desc">Stracchino cheese & Cetara anchovies</span>
-</span>
-<span class="menu-price">7.80</span>
-</div>
-
-<div class="menu-item">
-<span class="menu-name">Lardo di Colonnata IGP
-<span class="menu-desc">Cured Tuscan marble-aged Lardo served on toasted crostino</span>
-</span>
-<span class="menu-price">8.80</span>
-</div>
-
-<div class="menu-item">
-<span class="menu-name">Bruschette con mortadella
-<span class="menu-desc">Stracciatella, mortadella & pistacchio</span>
-</span>
-<span class="menu-price">6.80</span>
-</div>
-
-<div class="menu-item">
-<span class="menu-name">n'Copp' a bruschett'
-<span class="menu-desc">Air-dried ham speciality, pesto friarielli, pecorino & chilli</span>
-</span>
-<span class="menu-price">8.80</span>
-</div>
-
-</div>
-
-
-<div class="menu-group">
-
-<div class="menu-group-title">
-<h3>Dolce Vitality</h3>
-</div>
-
-<div class="menu-item"><span class="menu-name">Tiramisù</span><span class="menu-price">7.80</span></div>
-
-<div class="menu-item">
-<span class="menu-name">Torta Caprese
-<span class="menu-desc">Gluten-free almond chocolate cake</span>
-</span>
-<span class="menu-price">7.80</span>
-</div>
-
-<div class="menu-item">
-<span class="menu-name">Bignè con cioccolato
-<span class="menu-desc">Profiteroles with chocolate</span>
-</span>
-<span class="menu-price">7.80</span>
-</div>
-
-<div class="menu-item">
-<span class="menu-name">Dolce del giorno
-<span class="menu-desc">Housemade dessert</span>
-</span>
-<span class="menu-price">5.80</span>
-</div>
-
-</div>
-
-</div>
-
-
-<!-- APERITIVO -->
-
-<div class="menu-panel" id="menu-aperitivo">
-
-<div class="menu-group">
+            Spremuta d'arancia
 
-<div class="menu-group-title">
-<h3>Aperitivo del Mediterraneo</h3>
-</div>
+            <span class="menu-description">
+              Fresh Orange Juice · 0.125 l
+            </span>
 
-<div class="menu-item">
-<span class="menu-name">Essenza di Negroni
-<span class="menu-desc">A blend of three different Negronis crafted with different gins, vermouths and bitters</span>
-</span>
-<span class="menu-price">12.80</span>
-</div>
+          </span>
 
-<div class="menu-item">
-<span class="menu-name">Sbagliato Mediterraneo
-<span class="menu-desc">Campari with hints of rosemary, Vermouth all'arancia & Prosecco</span>
-</span>
-<span class="menu-price">9.80</span>
-</div>
+          <span class="menu-price">
+            4.80
+          </span>
 
-<div class="menu-item">
-<span class="menu-name">Conte Camillo “Goes to Miami”
-<span class="menu-desc">A tropical twist on the classic Negroni</span>
-</span>
-<span class="menu-price">12.80</span>
-</div>
+        </div>
 
-<div class="menu-item">
-<span class="menu-name">Golden Negroni
-<span class="menu-desc">Gin, Italicus & Gentian Bitters</span>
-</span>
-<span class="menu-price">12.80</span>
-</div>
 
-<div class="menu-item">
-<span class="menu-name">Garibaldi speciale
-<span class="menu-desc">Campari fortified & fresh grapefruit</span>
-</span>
-<span class="menu-price">9.80</span>
-</div>
+        <div class="menu-item">
 
-<div class="menu-item">
-<span class="menu-name">Gin Tonic
-<span class="menu-desc">Where botanicals come together in a perfect balance</span>
-</span>
-<span class="menu-price">14.80</span>
-</div>
+          <span class="menu-name">
 
-</div>
+            Spremuta di pompelmo
 
+            <span class="menu-description">
+              Fresh Grapefruit Juice · 0.125 l
+            </span>
 
-<div class="menu-group">
+          </span>
 
-<div class="menu-group-title">
-<h3>iSpritz Leggeri</h3>
-</div>
+          <span class="menu-price">
+            4.90
+          </span>
 
-<div class="menu-group-sub">Alcohol Free</div>
+        </div>
 
-<div class="menu-item">
-<span class="menu-name">Brezza Mediterranea
-<span class="menu-desc">Orgeat, fresh lemon, notes of green pepper & soda</span>
-</span>
-<span class="menu-price">6.80</span>
-</div>
 
-<div class="menu-item">
-<span class="menu-name">Me lo Pesca
-<span class="menu-desc">Homemade white peach purée, cranberries, fresh lemon & soda</span>
-</span>
-<span class="menu-price">6.80</span>
-</div>
+        <div class="menu-item">
 
-<div class="menu-item">
-<span class="menu-name">Pera ama Vaniglia
-<span class="menu-desc">Pear loves vanilla, fresh lemon & soda</span>
-</span>
-<span class="menu-price">6.80</span>
-</div>
+          <span class="menu-name">
 
-</div>
+            Almond Plant Drink
 
+            <span class="menu-description">
+              0.125 l
+            </span>
 
-<div class="menu-group">
+          </span>
 
-<div class="menu-group-title">
-<h3>Spritz</h3>
-</div>
+          <span class="menu-price">
+            4.80
+          </span>
 
-<div class="menu-item"><span class="menu-name">Mimosa Twist<span class="menu-desc">Fresh orange, bitters & Prosecco</span></span><span class="menu-price">8.20</span></div>
+        </div>
 
-<div class="menu-item"><span class="menu-name">Spritz Limoncello<span class="menu-desc">Prosecco, Limoncello & soda</span></span><span class="menu-price">8.70</span></div>
+      </div>
 
-<div class="menu-item"><span class="menu-name">Punt e Mes Spritz</span><span class="menu-price">7.50</span></div>
 
-<div class="menu-item"><span class="menu-name">Cynar Spritz</span><span class="menu-price">7.50</span></div>
 
-<div class="menu-item"><span class="menu-name">Campari Spritz</span><span class="menu-price">7.80</span></div>
+      <div class="menu-group">
 
-<div class="menu-item"><span class="menu-name">Aperol Spritz</span><span class="menu-price">7.80</span></div>
+        <div class="menu-group-header">
+          <h3>Speciality di Matcha</h3>
+        </div>
 
-<div class="menu-item"><span class="menu-name">Campari Soda</span><span class="menu-price">6.80</span></div>
 
-</div>
+        <div class="menu-item">
+          <span class="menu-name">Iced Blueberry Coconut</span>
+          <span class="menu-price">9.80</span>
+        </div>
 
-</div>
 
+        <div class="menu-item">
+          <span class="menu-name">Iced Matcha Orange</span>
+          <span class="menu-price">8.90</span>
+        </div>
 
-<!-- WINE -->
 
-<div class="menu-panel" id="menu-wine">
+        <div class="menu-item">
+          <span class="menu-name">Matcha Latte</span>
+          <span class="menu-price">7.60</span>
+        </div>
 
-<div class="menu-group">
+      </div>
 
-<div class="menu-group-title">
-<h3>Bollicine</h3>
-</div>
 
-<div class="menu-group-sub">
-By the Glass 0.125 l · Bottle
-</div>
 
-<div class="menu-item">
-<span class="menu-name">Spumante Anima Lavica — Ja'na're
-<span class="menu-desc">Elegant citrus notes, soft & balanced</span>
-</span>
-<span class="menu-price">8.80 / 48.00</span>
-</div>
+      <div class="menu-group">
 
-<div class="menu-item">
-<span class="menu-name">Prosecco Blanc de Blancs — Civa
-<span class="menu-desc">Fresh & delicate</span>
-</span>
-<span class="menu-price">6.60 / 34.00</span>
-</div>
+        <div class="menu-group-header">
+          <h3>Tee & Infusioni</h3>
+        </div>
 
-</div>
 
+        <div class="menu-item">
+          <span class="menu-name">Sencha Green</span>
+          <span class="menu-price">5.90</span>
+        </div>
 
-<div class="menu-group">
 
-<div class="menu-group-title">
-<h3>Vino Bianco</h3>
-</div>
+        <div class="menu-item">
+          <span class="menu-name">Mint Infusion</span>
+          <span class="menu-price">5.90</span>
+        </div>
 
-<div class="menu-group-sub">
-By the Glass 0.125 l · Bottle
-</div>
 
-<div class="menu-item">
-<span class="menu-name">Carricante — Etna Bianco DOC
-<span class="menu-desc">Minerality, fresh & crisp</span>
-</span>
-<span class="menu-price">9.80 / 53.00</span>
-</div>
+        <div class="menu-item">
+          <span class="menu-name">Cistus Herbal Tisana</span>
+          <span class="menu-price">5.90</span>
+        </div>
 
-<div class="menu-item">
-<span class="menu-name">Greco di Tufo — Pietralalata
-<span class="menu-desc">Dry, notes of pear, peach & citrus</span>
-</span>
-<span class="menu-price">5.80 / 34.00</span>
-</div>
+      </div>
 
-<div class="menu-item">
-<span class="menu-name">Coda di Volpe Alfabeto DOP
-<span class="menu-desc">Dry, white fruit, savoury & minerality</span>
-</span>
-<span class="menu-price">5.80 / 34.00</span>
-</div>
 
-</div>
 
+      <div class="menu-group">
 
-<div class="menu-group">
+        <div class="menu-group-header">
+          <h3>Colazione Italiana</h3>
+        </div>
 
-<div class="menu-group-title">
-<h3>Vino Rosé</h3>
-</div>
 
-<div class="menu-item">
-<span class="menu-name">Primitivo Aka — IGP Salento
-<span class="menu-desc">Juicy, fresh, mineral & savoury</span>
-</span>
-<span class="menu-price">9.00 / 49.00</span>
-</div>
+        <div class="menu-item">
+          <span class="menu-name">Cornetto pistacchio</span>
+          <span class="menu-price">4.90</span>
+        </div>
 
-</div>
 
+        <div class="menu-item">
+          <span class="menu-name">Cornetto crema vaniglia</span>
+          <span class="menu-price">4.60</span>
+        </div>
 
-<div class="menu-group">
 
-<div class="menu-group-title">
-<h3>Vino Rosso</h3>
-</div>
+        <div class="menu-item">
+          <span class="menu-name">Cornetto gianduja</span>
+          <span class="menu-price">4.20</span>
+        </div>
 
-<div class="menu-item">
-<span class="menu-name">Essentia — IGP Beneventano
-<span class="menu-desc">Aglianico, Barbera, Piedirosso, rich & smooth</span>
-</span>
-<span class="menu-price">10.80 / 55.00</span>
-</div>
 
-<div class="menu-item">
-<span class="menu-name">Sagrantino Montefalco — DOC
-<span class="menu-desc">Bold, full-bodied, vibrant & savoury</span>
-</span>
-<span class="menu-price">12.00 / 77.00</span>
-</div>
+        <div class="menu-item">
+          <span class="menu-name">Cornetto albicocca</span>
+          <span class="menu-price">3.90</span>
+        </div>
 
-<div class="menu-item">
-<span class="menu-name">Montepulciano D'Abruzzo DOP
-<span class="menu-desc">Organic, full-bodied & soft tannins</span>
-</span>
-<span class="menu-price">7.80 / 34.00</span>
-</div>
 
-</div>
+        <div class="menu-item">
+          <span class="menu-name">Sfogliatella</span>
+          <span class="menu-price">4.50</span>
+        </div>
 
+      </div>
 
-<div class="menu-group">
 
-<div class="menu-group-title">
-<h3>Birra</h3>
-</div>
 
-<div class="menu-item"><span class="menu-name">Poretti 4 Luppoli · 0.33 l</span><span class="menu-price">5.30</span></div>
+      <div class="menu-group">
 
-<div class="menu-item"><span class="menu-name">Menabrea La Bionda 150° · 0.33 l</span><span class="menu-price">5.30</span></div>
+        <div class="menu-group-header">
+          <h3>Colazione salata</h3>
+        </div>
 
-<div class="menu-item"><span class="menu-name">Rampensau IPA Alcohol Free · 0.33 l</span><span class="menu-price">7.30</span></div>
 
-</div>
+        <div class="menu-item">
 
+          <span class="menu-name">
 
-<div class="menu-group">
+            Crostone
 
-<div class="menu-group-title">
-<h3>Digestivi & Liquori</h3>
-</div>
+            <span class="menu-description">
+              Ham, artichoke spread & scamorza
+            </span>
 
-<div class="menu-item"><span class="menu-name">Limoncello · 3 cl</span><span class="menu-price">5.30</span></div>
-<div class="menu-item"><span class="menu-name">Averna · 3 cl</span><span class="menu-price">5.20</span></div>
-<div class="menu-item"><span class="menu-name">Vecchia Romagna · 3 cl</span><span class="menu-price">5.90</span></div>
-<div class="menu-item"><span class="menu-name">Bulleit Rye Whiskey · 4 cl</span><span class="menu-price">9.30</span></div>
-<div class="menu-item"><span class="menu-name">Mamont Vodka · 4 cl</span><span class="menu-price">9.90</span></div>
-<div class="menu-item"><span class="menu-name">Tanqueray No. Ten Gin · 4 cl</span><span class="menu-price">8.90</span></div>
+          </span>
 
-</div>
+          <span class="menu-price">
+            9.80
+          </span>
 
-</div>
+        </div>
 
 
-<p class="menu-note">
-All prices are in Euros inclusive VAT.<br>
-Allergen information about ingredients in our food and drinks
-can be obtained on request from our team.
-</p>
+        <div class="menu-item">
 
-</div>
+          <span class="menu-name">
+
+            Cornetto salato
+
+            <span class="menu-description">
+              Savoury filled croissant
+            </span>
+
+          </span>
+
+          <span class="menu-price">
+            8.20
+          </span>
+
+        </div>
+
+      </div>
+
+
+      <!-- SOFT DRINKS -->
+
+      <div class="menu-group">
+
+        <div class="menu-group-header">
+          <h3>Bibite</h3>
+        </div>
+
+
+        <div class="menu-item">
+          <span class="menu-name">
+            Tè freddo della casa
+            <span class="menu-description">0.25 l</span>
+          </span>
+          <span class="menu-price">4.90</span>
+        </div>
+
+
+        <div class="menu-item">
+          <span class="menu-name">
+            Soda Limone
+            <span class="menu-description">0.25 l / 0.5 l</span>
+          </span>
+          <span class="menu-price">3.20 / 5.30</span>
+        </div>
+
+
+        <div class="menu-item">
+          <span class="menu-name">
+            Soda ai fiori Sambuco
+            <span class="menu-description">0.25 l / 0.5 l</span>
+          </span>
+          <span class="menu-price">3.20 / 5.30</span>
+        </div>
+
+
+        <div class="menu-item">
+          <span class="menu-name">
+            Succo di Pera
+            <span class="menu-description">0.25 l / 0.5 l</span>
+          </span>
+          <span class="menu-price">3.80 / 5.60</span>
+        </div>
+
+
+        <div class="menu-item">
+          <span class="menu-name">
+            Tonic Water
+            <span class="menu-description">0.20 l</span>
+          </span>
+          <span class="menu-price">5.30</span>
+        </div>
+
+
+        <div class="menu-item">
+          <span class="menu-name">
+            Mole Cola
+            <span class="menu-description">0.33 l</span>
+          </span>
+          <span class="menu-price">5.10</span>
+        </div>
+
+
+        <div class="menu-item">
+          <span class="menu-name">
+            Aranciata amara
+            <span class="menu-description">0.275 l</span>
+          </span>
+          <span class="menu-price">5.10</span>
+        </div>
+
+
+        <div class="menu-item">
+          <span class="menu-name">
+            Chinotto
+            <span class="menu-description">0.275 l</span>
+          </span>
+          <span class="menu-price">5.10</span>
+        </div>
+
+      </div>
+
+
+    </div>
+
+
+
+    <!-- =====================================================
+         FOOD
+    ====================================================== -->
+
+    <div
+      class="menu-panel"
+      id="menu-food"
+    >
+
+
+      <div class="menu-group">
+
+        <div class="menu-group-header">
+          <h3>L'Aperitivo rinforzato</h3>
+        </div>
+
+        <div class="menu-subtitle">
+          Hearty Plates to Share
+        </div>
+
+
+        <div class="menu-item">
+
+          <span class="menu-name">
+            Prosciutto e Pecorino
+
+            <span class="menu-description">
+              Naturally aged artisan prosciutto & pecorino
+            </span>
+          </span>
+
+          <span class="menu-price">
+            17.90
+          </span>
+
+        </div>
+
+
+        <div class="menu-item">
+
+          <span class="menu-name">
+            Bresaola e Fior di ricotta
+
+            <span class="menu-description">
+              Air-dried Fassona beef & fresh ricotta
+            </span>
+          </span>
+
+          <span class="menu-price">
+            19.80
+          </span>
+
+        </div>
+
+
+        <div class="menu-item">
+
+          <span class="menu-name">
+            Piatto aperitivo misto
+
+            <span class="menu-description">
+              Selection of cheeses, cured meats,
+              pickled vegetables & fruit preserve
+            </span>
+          </span>
+
+          <span class="menu-price">
+            18.90
+          </span>
+
+        </div>
+
+
+        <div class="menu-item">
+          <span class="menu-name">
+            Piatto di Coppa
+          </span>
+
+          <span class="menu-price">
+            9.90
+          </span>
+        </div>
+
+
+        <div class="menu-item">
+          <span class="menu-name">
+            Piatto di Mortadella
+          </span>
+
+          <span class="menu-price">
+            7.90
+          </span>
+        </div>
+
+
+        <div class="menu-item">
+          <span class="menu-name">
+            Selezione di formaggi
+          </span>
+
+          <span class="menu-price">
+            18.90
+          </span>
+        </div>
+
+
+        <div class="menu-item">
+          <span class="menu-name">
+            Porzione di pane
+          </span>
+
+          <span class="menu-price">
+            3.10
+          </span>
+        </div>
+
+      </div>
+
+
+
+      <div class="menu-group">
+
+        <div class="menu-group-header">
+          <h3>La Focaccia</h3>
+        </div>
+
+
+        <div class="menu-item">
+
+          <span class="menu-name">
+
+            Giorgione 2.0
+
+            <span class="menu-description">
+              Mortadella, rucola, fennel,
+              confit tomatoes & scamorza
+            </span>
+
+          </span>
+
+          <span class="menu-price">
+            13.80
+          </span>
+
+        </div>
+
+
+        <div class="menu-item">
+
+          <span class="menu-name">
+
+            Pecorino
+
+            <span class="menu-description">
+              Salami, grilled pecorino,
+              artichoke spread, rucola
+              & confit tomatoes
+            </span>
+
+          </span>
+
+          <span class="menu-price">
+            12.80
+          </span>
+
+        </div>
+
+
+        <div class="menu-item">
+
+          <span class="menu-name">
+
+            Vegetariana
+
+            <span class="menu-description">
+              Zucchini, rucola,
+              artichoke spread,
+              confit tomatoes & scamorza
+            </span>
+
+          </span>
+
+          <span class="menu-price">
+            12.80
+          </span>
+
+        </div>
+
+
+        <div class="menu-item">
+
+          <span class="menu-name">
+
+            N'coppa a Focaccia
+
+            <span class="menu-description">
+              Air-dried ham speciality,
+              pesto friarielli,
+              scamorza & chilli
+            </span>
+
+          </span>
+
+          <span class="menu-price">
+            13.90
+          </span>
+
+        </div>
+
+
+        <div class="menu-item">
+
+          <span class="menu-name">
+
+            iMulini
+
+            <span class="menu-description">
+              Prosciutto, rucola,
+              grilled zucchini,
+              stracciatella & lemon zest
+            </span>
+
+          </span>
+
+          <span class="menu-price">
+            14.80
+          </span>
+
+        </div>
+
+      </div>
+
+
+
+      <div class="menu-group">
+
+        <div class="menu-group-header">
+          <h3>i Sfizi Classici</h3>
+        </div>
+
+
+        <div class="menu-item">
+          <span class="menu-name">
+            Porzione di olive e mandorle
+          </span>
+          <span class="menu-price">
+            9.20
+          </span>
+        </div>
+
+
+        <div class="menu-item">
+          <span class="menu-name">
+            Pane, burro & alici
+          </span>
+          <span class="menu-price">
+            8.80
+          </span>
+        </div>
+
+
+        <div class="menu-item">
+          <span class="menu-name">
+            Baccalà mantecato
+          </span>
+          <span class="menu-price">
+            8.50
+          </span>
+        </div>
+
+
+        <div class="menu-item">
+          <span class="menu-name">
+            Bruschette Alici di Cetara
+          </span>
+          <span class="menu-price">
+            7.80
+          </span>
+        </div>
+
+
+        <div class="menu-item">
+          <span class="menu-name">
+            Lardo di Colonnata IGP
+          </span>
+          <span class="menu-price">
+            8.80
+          </span>
+        </div>
+
+
+        <div class="menu-item">
+          <span class="menu-name">
+            Bruschette con mortadella
+          </span>
+          <span class="menu-price">
+            6.80
+          </span>
+        </div>
+
+
+        <div class="menu-item">
+          <span class="menu-name">
+            n'Copp' a bruschett'
+          </span>
+          <span class="menu-price">
+            8.80
+          </span>
+        </div>
+
+      </div>
+
+
+
+      <div class="menu-group">
+
+        <div class="menu-group-header">
+          <h3>Dolce Vitality</h3>
+        </div>
+
+
+        <div class="menu-item">
+          <span class="menu-name">
+            Tiramisù
+          </span>
+          <span class="menu-price">
+            7.80
+          </span>
+        </div>
+
+
+        <div class="menu-item">
+          <span class="menu-name">
+            Torta Caprese
+          </span>
+          <span class="menu-price">
+            7.80
+          </span>
+        </div>
+
+
+        <div class="menu-item">
+          <span class="menu-name">
+            Bignè con cioccolato
+          </span>
+          <span class="menu-price">
+            7.80
+          </span>
+        </div>
+
+
+        <div class="menu-item">
+          <span class="menu-name">
+            Dolce del giorno
+          </span>
+          <span class="menu-price">
+            5.80
+          </span>
+        </div>
+
+      </div>
+
+
+    </div>
+
+
+
+    <!-- =====================================================
+         APERITIVO
+    ====================================================== -->
+
+    <div
+      class="menu-panel"
+      id="menu-aperitivo"
+    >
+
+
+      <div class="menu-group">
+
+        <div class="menu-group-header">
+          <h3>Aperitivo del Mediterraneo</h3>
+        </div>
+
+
+        <div class="menu-item">
+          <span class="menu-name">
+            Essenza di Negroni
+          </span>
+          <span class="menu-price">
+            12.80
+          </span>
+        </div>
+
+
+        <div class="menu-item">
+          <span class="menu-name">
+            Sbagliato Mediterraneo
+          </span>
+          <span class="menu-price">
+            9.80
+          </span>
+        </div>
+
+
+        <div class="menu-item">
+          <span class="menu-name">
+            Conte Camillo “Goes to Miami”
+          </span>
+          <span class="menu-price">
+            12.80
+          </span>
+        </div>
+
+
+        <div class="menu-item">
+          <span class="menu-name">
+            Golden Negroni
+          </span>
+          <span class="menu-price">
+            12.80
+          </span>
+        </div>
+
+
+        <div class="menu-item">
+          <span class="menu-name">
+            Garibaldi speciale
+          </span>
+          <span class="menu-price">
+            9.80
+          </span>
+        </div>
+
+
+        <div class="menu-item">
+          <span class="menu-name">
+            Gin Tonic
+          </span>
+          <span class="menu-price">
+            14.80
+          </span>
+        </div>
+
+      </div>
+
+
+
+      <div class="menu-group">
+
+        <div class="menu-group-header">
+          <h3>iSpritz Leggeri</h3>
+        </div>
+
+        <div class="menu-subtitle">
+          Alcohol Free
+        </div>
+
+
+        <div class="menu-item">
+          <span class="menu-name">
+            Brezza Mediterranea
+          </span>
+          <span class="menu-price">
+            6.80
+          </span>
+        </div>
+
+
+        <div class="menu-item">
+          <span class="menu-name">
+            Me lo Pesca
+          </span>
+          <span class="menu-price">
+            6.80
+          </span>
+        </div>
+
+
+        <div class="menu-item">
+          <span class="menu-name">
+            Pera ama Vaniglia
+          </span>
+          <span class="menu-price">
+            6.80
+          </span>
+        </div>
+
+      </div>
+
+
+
+      <div class="menu-group">
+
+        <div class="menu-group-header">
+          <h3>Spritz</h3>
+        </div>
+
+
+        <div class="menu-item">
+          <span class="menu-name">Mimosa Twist</span>
+          <span class="menu-price">8.20</span>
+        </div>
+
+
+        <div class="menu-item">
+          <span class="menu-name">Spritz Limoncello</span>
+          <span class="menu-price">8.70</span>
+        </div>
+
+
+        <div class="menu-item">
+          <span class="menu-name">Punt e Mes Spritz</span>
+          <span class="menu-price">7.50</span>
+        </div>
+
+
+        <div class="menu-item">
+          <span class="menu-name">Cynar Spritz</span>
+          <span class="menu-price">7.50</span>
+        </div>
+
+
+        <div class="menu-item">
+          <span class="menu-name">Campari Spritz</span>
+          <span class="menu-price">7.80</span>
+        </div>
+
+
+        <div class="menu-item">
+          <span class="menu-name">Aperol Spritz</span>
+          <span class="menu-price">7.80</span>
+        </div>
+
+
+        <div class="menu-item">
+          <span class="menu-name">Campari Soda</span>
+          <span class="menu-price">6.80</span>
+        </div>
+
+      </div>
+
+
+    </div>
+
+
+
+    <!-- =====================================================
+         WINE & DRINKS
+    ====================================================== -->
+
+    <div
+      class="menu-panel"
+      id="menu-wine"
+    >
+
+
+      <div class="menu-group">
+
+        <div class="menu-group-header">
+          <h3>Bollicine</h3>
+        </div>
+
+
+        <div class="menu-item">
+
+          <span class="menu-name">
+            Spumante Anima Lavica — Ja'na're
+          </span>
+
+          <span class="menu-price">
+            8.80 / 48.00
+          </span>
+
+        </div>
+
+
+        <div class="menu-item">
+
+          <span class="menu-name">
+            Prosecco Blanc de Blancs — Civa
+          </span>
+
+          <span class="menu-price">
+            6.60 / 34.00
+          </span>
+
+        </div>
+
+      </div>
+
+
+
+      <div class="menu-group">
+
+        <div class="menu-group-header">
+          <h3>Vino Bianco</h3>
+        </div>
+
+
+        <div class="menu-item">
+          <span class="menu-name">
+            Carricante — Etna bianco DOC
+          </span>
+          <span class="menu-price">
+            9.80 / 53.00
+          </span>
+        </div>
+
+
+        <div class="menu-item">
+          <span class="menu-name">
+            Greco di Tufo — Pietralalata
+          </span>
+          <span class="menu-price">
+            5.80 / 34.00
+          </span>
+        </div>
+
+
+        <div class="menu-item">
+          <span class="menu-name">
+            Coda di Volpe Alfabeto DOP
+          </span>
+          <span class="menu-price">
+            5.80 / 34.00
+          </span>
+        </div>
+
+      </div>
+
+
+
+      <div class="menu-group">
+
+        <div class="menu-group-header">
+          <h3>Vino Rosé</h3>
+        </div>
+
+
+        <div class="menu-item">
+          <span class="menu-name">
+            Primitivo Aka — IGP Salento
+          </span>
+          <span class="menu-price">
+            9.00 / 49.00
+          </span>
+        </div>
+
+      </div>
+
+
+
+      <div class="menu-group">
+
+        <div class="menu-group-header">
+          <h3>Vino Rosso</h3>
+        </div>
+
+
+        <div class="menu-item">
+          <span class="menu-name">
+            Essentia — IGP Beneventano
+          </span>
+          <span class="menu-price">
+            10.80 / 55.00
+          </span>
+        </div>
+
+
+        <div class="menu-item">
+          <span class="menu-name">
+            Sagrantino Montefalco — DOC
+          </span>
+          <span class="menu-price">
+            12.00 / 77.00
+          </span>
+        </div>
+
+
+        <div class="menu-item">
+          <span class="menu-name">
+            Montepulciano D'Abruzzo DOP
+          </span>
+          <span class="menu-price">
+            7.80 / 34.00
+          </span>
+        </div>
+
+      </div>
+
+
+
+      <div class="menu-group">
+
+        <div class="menu-group-header">
+          <h3>Birra</h3>
+        </div>
+
+
+        <div class="menu-item">
+          <span class="menu-name">
+            Poretti 4 Luppoli
+            <span class="menu-description">0.33 l</span>
+          </span>
+          <span class="menu-price">
+            5.30
+          </span>
+        </div>
+
+
+        <div class="menu-item">
+          <span class="menu-name">
+            Menabrea La Bionda 150°
+            <span class="menu-description">0.33 l</span>
+          </span>
+          <span class="menu-price">
+            5.30
+          </span>
+        </div>
+
+
+        <div class="menu-item">
+          <span class="menu-name">
+            Rampensau IPA Alcohol Free
+            <span class="menu-description">0.33 l</span>
+          </span>
+          <span class="menu-price">
+            7.30
+          </span>
+        </div>
+
+      </div>
+
+
+
+      <div class="menu-group">
+
+        <div class="menu-group-header">
+          <h3>Digestivi & Liquori</h3>
+        </div>
+
+
+        <div class="menu-item">
+          <span class="menu-name">Limoncello · 3 cl</span>
+          <span class="menu-price">5.30</span>
+        </div>
+
+
+        <div class="menu-item">
+          <span class="menu-name">Averna · 3 cl</span>
+          <span class="menu-price">5.20</span>
+        </div>
+
+
+        <div class="menu-item">
+          <span class="menu-name">Vecchia Romagna · 3 cl</span>
+          <span class="menu-price">5.90</span>
+        </div>
+
+
+        <div class="menu-item">
+          <span class="menu-name">Bulleit Rye Whiskey · 4 cl</span>
+          <span class="menu-price">9.30</span>
+        </div>
+
+
+        <div class="menu-item">
+          <span class="menu-name">Mamont Vodka · 4 cl</span>
+          <span class="menu-price">9.90</span>
+        </div>
+
+
+        <div class="menu-item">
+          <span class="menu-name">Tanqueray No. Ten Gin · 4 cl</span>
+          <span class="menu-price">8.90</span>
+        </div>
+
+      </div>
+
+
+
+      <div class="menu-group">
+
+        <div class="menu-group-header">
+          <h3>Mineral Water & Soda</h3>
+        </div>
+
+
+        <div class="menu-item">
+          <span class="menu-name">
+            Montes Still / Sparkling
+            <span class="menu-description">0.33 l</span>
+          </span>
+          <span class="menu-price">
+            3.30
+          </span>
+        </div>
+
+
+        <div class="menu-item">
+          <span class="menu-name">
+            Carafe Soda
+            <span class="menu-description">0.50 l / 1.0 l</span>
+          </span>
+          <span class="menu-price">
+            1.00 / 2.00
+          </span>
+        </div>
+
+      </div>
+
+
+    </div>
+
+
+
+    <p class="menu-note">
+
+      All prices are in Euros inclusive VAT.
+
+      <br>
+
+      Allergen information about ingredients
+      in our food and drinks
+      is available on request.
+
+    </p>
+
+
+  </div>
 
 </section>
 
 
-<!-- COFFEE VISUAL -->
+
+<!-- =========================================================
+     COFFEE
+========================================================= -->
 
 <section class="coffee-feature">
 
-<div class="coffee-text">
 
-<div class="reveal">
+  <div class="coffee-copy">
 
-<div class="label">
-The coffee ritual
-</div>
+    <div class="reveal">
 
-<h2>
-Un caffè,<br>per favore.
-</h2>
+      <div class="label">
+        The coffee ritual
+      </div>
 
-<p>
-From the first espresso of the morning
-to an afternoon cappuccino —
-coffee is at the heart of i Mulini.
-</p>
 
-</div>
+      <h2>
+        Un caffè,<br>
+        per favore.
+      </h2>
 
-</div>
 
-<div class="coffee-image">
-<img src="marzocco.jpg" alt="Coffee at i Mulini">
-</div>
+      <p>
+        From the first espresso of the morning
+        to an afternoon cappuccino,
+        coffee is part of the rhythm
+        of i Mulini.
+      </p>
+
+    </div>
+
+  </div>
+
+
+
+  <div class="coffee-photo">
+
+    <img
+      src="marzocco.jpg"
+      alt="Coffee at i Mulini"
+    >
+
+  </div>
+
 
 </section>
 
 
-<!-- VISIT -->
 
-<section class="section visit" id="visit">
+<!-- =========================================================
+     VISIT
+========================================================= -->
 
-<div class="container visit-layout">
+<section
+  class="section visit"
+  id="visit"
+>
 
-<div class="visit-image reveal">
-<img src="giardino.jpg" alt="i Mulini Vienna">
-</div>
-
-<div class="visit-card reveal">
-
-<div class="label">
-Visit us
-</div>
-
-<h2 class="display">
-Ci vediamo<br>ai Mulini.
-</h2>
+  <div class="container visit-layout">
 
 
-<div class="visit-block">
+    <div class="visit-photo reveal">
 
-<h3>Address</h3>
+      <img
+        src="giardino.jpg"
+        alt="i Mulini Caffè Mediterraneo Vienna"
+      >
 
-<p>
-Josefstädter Straße 53<br>
-1080 Vienna
-</p>
-
-</div>
+    </div>
 
 
-<div class="visit-block">
 
-<h3>Opening Hours</h3>
-
-<p>
-Monday – Friday · 07:30 – 20:00<br>
-Saturday · 10:00 – 20:00<br>
-Sunday · Closed
-</p>
-
-</div>
+    <div class="visit-content reveal">
 
 
-<div class="visit-block">
-
-<h3>Good to know</h3>
-
-<p>
-Walk-ins only — no reservations.
-</p>
-
-</div>
+      <div class="label">
+        Visit us
+      </div>
 
 
-<div class="visit-block">
-
-<h3>Contact</h3>
-
-<p>
-<a href="tel:+4369020049832">
-+43 690 200 49 832
-</a>
-<br>
-
-<a href="mailto:info@imulinicaffe.com">
-info@imulinicaffe.com
-</a>
-</p>
-
-</div>
+      <h2 class="display">
+        Ci vediamo<br>
+        ai Mulini.
+      </h2>
 
 
-<div class="visit-actions">
 
-<a
-href="https://share.google/wNpHvrBmi0rf2ShQI"
-target="_blank"
-rel="noopener noreferrer"
-class="btn btn-blue">
-Get directions
-</a>
+      <div class="visit-block">
 
-<a
-href="https://www.instagram.com/imulinicaffe/"
-target="_blank"
-rel="noopener noreferrer"
-class="btn btn-terra">
-Instagram
-</a>
+        <h3>
+          Address
+        </h3>
 
-</div>
+        <p>
+          Josefstädter Straße 53<br>
+          1080 Vienna
+        </p>
 
-</div>
+      </div>
 
-</div>
+
+
+      <div class="visit-block">
+
+        <h3>
+          Opening Hours
+        </h3>
+
+        <p>
+          Monday – Friday<br>
+          07:30 – 20:00
+        </p>
+
+        <p style="margin-top:10px;">
+          Saturday<br>
+          10:00 – 20:00
+        </p>
+
+        <p style="margin-top:10px;">
+          Sunday · Closed
+        </p>
+
+      </div>
+
+
+
+      <div class="visit-block">
+
+        <h3>
+          Reservations
+        </h3>
+
+        <p>
+          Walk-ins only — no reservations
+        </p>
+
+      </div>
+
+
+
+      <div class="visit-block">
+
+        <h3>
+          Contact
+        </h3>
+
+        <p>
+
+          <a href="tel:+4369020049832">
+            +43 690 200 49 832
+          </a>
+
+          <br>
+
+          <a href="mailto:info@imulinicaffe.com">
+            info@imulinicaffe.com
+          </a>
+
+        </p>
+
+      </div>
+
+
+
+      <div class="visit-buttons">
+
+
+        <a
+          href="https://share.google/wNpHvrBmi0rf2ShQI"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="button button-blue"
+        >
+          Get directions
+        </a>
+
+
+        <a
+          href="https://www.instagram.com/imulinicaffe/"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="button button-outline"
+        >
+          Instagram
+        </a>
+
+
+      </div>
+
+
+    </div>
+
+
+  </div>
 
 </section>
 
 
-<!-- SOCIAL -->
+
+<!-- =========================================================
+     SOCIAL
+========================================================= -->
 
 <section class="social">
 
-<div class="reveal">
 
-<div class="label">
-Follow along
-</div>
+  <div class="reveal">
 
-<h2>
-A little piece<br>of Italy in Vienna.
-</h2>
+    <div class="label">
+      Follow along
+    </div>
 
-<p>
-@imulinicaffe
-</p>
 
-<a
-href="https://www.instagram.com/imulinicaffe/"
-target="_blank"
-rel="noopener noreferrer"
-class="btn">
-Follow on Instagram
-</a>
+    <h2>
+      See you<br>
+      at i Mulini.
+    </h2>
 
-</div>
+
+    <p>
+      @imulinicaffe
+    </p>
+
+
+    <a
+      href="https://www.instagram.com/imulinicaffe/"
+      target="_blank"
+      rel="noopener noreferrer"
+      class="button"
+    >
+      Follow on Instagram
+    </a>
+
+  </div>
+
 
 </section>
 
 
-<!-- FOOTER -->
+
+<!-- =========================================================
+     FOOTER
+========================================================= -->
 
 <footer>
 
-<div class="footer">
 
-<div>
-
-<div class="footer-logo">
-<img src="logo.svg" alt="i Mulini">
-</div>
-
-<p>
-From Positano to Vienna.<br>
-Caffè · Food · Aperitivo
-</p>
-
-</div>
+  <div class="footer-grid">
 
 
-<div>
+    <div>
 
-<h4>Find us</h4>
+      <div class="footer-logo">
 
-<p>
-Josefstädter Straße 53<br>
-1080 Vienna
-</p>
+        <img
+          src="logo.svg"
+          alt="i Mulini logo"
+        >
 
-<p style="margin-top:18px;">
-Walk-ins only<br>
-No reservations
-</p>
-
-</div>
+      </div>
 
 
-<div>
+      <p>
+        Caffè Mediterraneo<br>
+        Vienna
+      </p>
 
-<h4>Follow & Contact</h4>
-
-<p>
-
-<a
-href="https://www.instagram.com/imulinicaffe/"
-target="_blank"
-rel="noopener noreferrer">
-Instagram
-</a>
-
-<br>
-
-<a
-href="https://www.facebook.com/profile.php?id=61593121621359"
-target="_blank"
-rel="noopener noreferrer">
-Facebook
-</a>
-
-<br>
-
-<a href="mailto:info@imulinicaffe.com">
-info@imulinicaffe.com
-</a>
-
-</p>
-
-</div>
-
-</div>
+    </div>
 
 
-<div class="footer-bottom">
 
-<span>
-© 2026 i Mulini Caffè Mediterraneo
-</span>
+    <div>
 
-<span>
-Josefstadt · Vienna
-</span>
+      <h4>
+        Find us
+      </h4>
 
-</div>
+
+      <p>
+        Josefstädter Straße 53<br>
+        1080 Vienna
+      </p>
+
+
+      <p style="margin-top:18px;">
+        Walk-ins only<br>
+        No reservations
+      </p>
+
+    </div>
+
+
+
+    <div>
+
+      <h4>
+        Follow & Contact
+      </h4>
+
+
+      <p>
+
+        <a
+          href="https://www.instagram.com/imulinicaffe/"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Instagram
+        </a>
+
+        <br>
+
+
+        <a
+          href="https://www.facebook.com/profile.php?id=61593121621359"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Facebook
+        </a>
+
+        <br>
+
+
+        <a
+          href="mailto:info@imulinicaffe.com"
+        >
+          info@imulinicaffe.com
+        </a>
+
+      </p>
+
+    </div>
+
+
+  </div>
+
+
+
+  <div class="footer-bottom">
+
+    <span>
+      © 2026 i Mulini Caffè Mediterraneo
+    </span>
+
+    <span>
+      Josefstadt · Vienna
+    </span>
+
+  </div>
+
 
 </footer>
 
 
+
+<!-- =========================================================
+     JAVASCRIPT
+========================================================= -->
+
 <script>
 
-/* PAGE LOAD */
 
-window.addEventListener("load", function(){
-  document.body.classList.add("loaded");
-});
+  /* =======================================================
+     HERO LOAD
+  ======================================================= */
 
+  window.addEventListener(
+    "load",
+    function () {
 
-/* NAVIGATION */
+      document.body.classList.add("loaded");
 
-const nav = document.getElementById("nav");
-
-window.addEventListener("scroll", function(){
-
-  if(window.scrollY > 80){
-    nav.classList.add("scrolled");
-  } else {
-    nav.classList.remove("scrolled");
-  }
-
-});
+    }
+  );
 
 
-/* SCROLL REVEALS */
 
-const observer = new IntersectionObserver(
-  function(entries){
+  /* =======================================================
+     NAVIGATION
+  ======================================================= */
 
-    entries.forEach(function(entry){
+  const nav =
+    document.getElementById("nav");
 
-      if(entry.isIntersecting){
-        entry.target.classList.add("visible");
-        observer.unobserve(entry.target);
+
+  window.addEventListener(
+    "scroll",
+    function () {
+
+      if (window.scrollY > 80) {
+
+        nav.classList.add("scrolled");
+
       }
 
-    });
+      else {
 
-  },
-  {
-    threshold:0.12
-  }
-);
+        nav.classList.remove("scrolled");
 
-document.querySelectorAll(".reveal").forEach(function(el){
-  observer.observe(el);
-});
+      }
+
+    }
+  );
 
 
-/* MOMENT SELECTOR */
 
-const momentTabs =
-document.querySelectorAll(".moment-tab");
+  /* =======================================================
+     SCROLL ANIMATIONS
+  ======================================================= */
 
-momentTabs.forEach(function(tab){
+  const reducedMotion =
+    window.matchMedia(
+      "(prefers-reduced-motion: reduce)"
+    ).matches;
 
-  tab.addEventListener("click", function(){
 
-    momentTabs.forEach(function(item){
-      item.classList.remove("active");
-    });
+  if (!reducedMotion) {
 
-    document.querySelectorAll(".moment-content")
-      .forEach(function(content){
-        content.classList.remove("active");
-      });
+    const observer =
+      new IntersectionObserver(
 
-    tab.classList.add("active");
+        function (entries) {
 
-    const selected =
-      document.getElementById(
-        "moment-" + tab.dataset.moment
+          entries.forEach(
+            function (entry) {
+
+              if (entry.isIntersecting) {
+
+                entry.target.classList.add(
+                  "visible"
+                );
+
+                observer.unobserve(
+                  entry.target
+                );
+
+              }
+
+            }
+          );
+
+        },
+
+        {
+          threshold: 0.12
+        }
+
       );
 
-    selected.classList.add("active");
-
-  });
-
-});
-
-
-/* MENU */
-
-const menuTabs =
-document.querySelectorAll(".menu-tab");
-
-menuTabs.forEach(function(tab){
-
-  tab.addEventListener("click", function(){
-
-    menuTabs.forEach(function(item){
-      item.classList.remove("active");
-    });
-
-    document.querySelectorAll(".menu-panel")
-      .forEach(function(panel){
-        panel.classList.remove("active");
-      });
-
-    tab.classList.add("active");
 
     document
-      .getElementById(
-        "menu-" + tab.dataset.menu
-      )
-      .classList.add("active");
+      .querySelectorAll(".reveal")
+      .forEach(
 
-  });
+        function (element) {
 
-});
+          observer.observe(element);
+
+        }
+
+      );
+
+  }
+
+  else {
+
+    document
+      .querySelectorAll(".reveal")
+      .forEach(
+
+        function (element) {
+
+          element.classList.add("visible");
+
+        }
+
+      );
+
+  }
+
+
+
+  /* =======================================================
+     MORNING / LUNCH / APERITIVO
+  ======================================================= */
+
+  const experienceTabs =
+    document.querySelectorAll(
+      ".experience-tab"
+    );
+
+
+  const experiencePanels =
+    document.querySelectorAll(
+      ".experience-panel"
+    );
+
+
+  experienceTabs.forEach(
+
+    function (tab) {
+
+      tab.addEventListener(
+        "click",
+        function () {
+
+          experienceTabs.forEach(
+            function (item) {
+
+              item.classList.remove(
+                "active"
+              );
+
+              item.setAttribute(
+                "aria-selected",
+                "false"
+              );
+
+            }
+          );
+
+
+          experiencePanels.forEach(
+            function (panel) {
+
+              panel.classList.remove(
+                "active"
+              );
+
+            }
+          );
+
+
+          tab.classList.add(
+            "active"
+          );
+
+
+          tab.setAttribute(
+            "aria-selected",
+            "true"
+          );
+
+
+          const selected =
+            tab.dataset.experience;
+
+
+          const panel =
+            document.getElementById(
+              "experience-" + selected
+            );
+
+
+          if (panel) {
+
+            panel.classList.add(
+              "active"
+            );
+
+          }
+
+        }
+      );
+
+    }
+
+  );
+
+
+
+  /* =======================================================
+     MENU
+  ======================================================= */
+
+  const menuTabs =
+    document.querySelectorAll(
+      ".menu-tab"
+    );
+
+
+  const menuPanels =
+    document.querySelectorAll(
+      ".menu-panel"
+    );
+
+
+  menuTabs.forEach(
+
+    function (tab) {
+
+      tab.addEventListener(
+        "click",
+        function () {
+
+
+          menuTabs.forEach(
+            function (item) {
+
+              item.classList.remove(
+                "active"
+              );
+
+              item.setAttribute(
+                "aria-selected",
+                "false"
+              );
+
+            }
+          );
+
+
+          menuPanels.forEach(
+            function (panel) {
+
+              panel.classList.remove(
+                "active"
+              );
+
+            }
+          );
+
+
+          tab.classList.add(
+            "active"
+          );
+
+
+          tab.setAttribute(
+            "aria-selected",
+            "true"
+          );
+
+
+          const selected =
+            tab.dataset.menu;
+
+
+          const panel =
+            document.getElementById(
+              "menu-" + selected
+            );
+
+
+          if (panel) {
+
+            panel.classList.add(
+              "active"
+            );
+
+          }
+
+        }
+      );
+
+    }
+
+  );
+
 
 </script>
+
 
 </body>
 </html>
